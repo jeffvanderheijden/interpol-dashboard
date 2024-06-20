@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { illegalActivitySelector } from '../state/illegalActivity';
-import { fileVisibleContent, setFileStateContent } from '../state/fileState';
+import { fileVisibleContent, setFileStateContent, fileVisibleSelector } from '../state/fileState';
 import NoSSR from '../components/NoSSR/NoSSR';
 import Window from "../components/Window/Window";
 import ServerList from "../components/ServerList/ServerList";
@@ -25,6 +25,7 @@ const IndexPage = () => {
   const dispatch = useDispatch();
   const hasIllegalActivity = useSelector(illegalActivitySelector);
   const initialValue = useSelector(fileVisibleContent);
+  const fileVisible = useSelector(fileVisibleSelector);
 
   const [editorState, setEditorState] = useState(initialValue); 
   const [windows, setWindows] = useState([
@@ -38,6 +39,15 @@ const IndexPage = () => {
     dispatch(setFileStateContent(editorState));
   }, [editorState, dispatch]);
 
+  const hideEditor = () => {
+    if (window.name === "CodeEditor" && !fileVisible) {
+      console.log(fileVisible)
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   return (
     <NoSSR>
       {hasIllegalActivity ? (
@@ -50,7 +60,7 @@ const IndexPage = () => {
           <SEO title="Home" />
           {windows.map((window, i) => (
             <div key={`window${i}`}>
-              {window.open && (
+              {window.open && hideEditor() && (
                 <Window
                   window={window}
                   windows={windows}

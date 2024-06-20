@@ -12,13 +12,11 @@ import { serverListSelector, setConnection } from "../../state/serverList";
 import { pushTutorial } from "../../state/tutorial";
 
 const ServerList = () => {
+    const dispatch = useDispatch();
     const connection = useSelector(serverListSelector);
 
     const [selected, setSelected] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [connected, setConnected] = useState(connection ? connection : null);
-
-    const dispatch = useDispatch();
 
     const IPAddresses = {
         "Zuid-Holland": "146.124.69.121",
@@ -43,20 +41,18 @@ const ServerList = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            setConnected({ province, IPAddress });
             dispatch(setConnection({ province, IPAddress }));
             province === "Zuid-Holland" && dispatch(pushTutorial("tutorialThree"));
         }, 4000);
     }
 
     const disconnect = () => {
-        setConnected(false);
         dispatch(setConnection(false));
     }
 
     return (
         <div id="serverList">
-            {!connected && (
+            {!connection && (
                 <>
                     <SVGMap
                         map={Netherlands}
@@ -79,7 +75,7 @@ const ServerList = () => {
                     <span>Connecting</span>
                 </div>
             )}
-            {connected && (
+            {connection && (
                 <div id="connectedScreen">
                     <ul>
                         <li>Status:</li> 
@@ -90,8 +86,8 @@ const ServerList = () => {
                             </div>
                             <span className="connectedDot">Connected</span>
                         </li>
-                        <li>{connected.province}:</li> 
-                        <li>{connected.IPAddress}</li>
+                        <li>{connection.province}:</li> 
+                        <li>{connection.IPAddress}</li>
                     </ul>
                     <ConnectionSpeed />
                     <Button onClick={() => { disconnect() }}>Disconnect</Button>

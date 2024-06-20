@@ -7,12 +7,11 @@ import Button from "./../Button/Button";
 
 import { serverListSelector } from "../../state/serverList";
 import { pushTutorial } from "../../state/tutorial";
-import { setFileVisibleContent, fileVisibleSelector } from "../../state/fileState";
+import { setFileVisibleContent } from "../../state/fileState";
 
 const CustomTerminal = () => {
     const dispatch = useDispatch();
     const isConnected = useSelector(serverListSelector);
-    const fileVisible = useSelector(fileVisibleSelector);
 
     return (
         <>

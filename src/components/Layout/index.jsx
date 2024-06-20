@@ -41,7 +41,6 @@ const Layout = ({
 
   useEffect(() => {
     setTimeout(() => {
-      console.log('test')
       hasVirus && setCompMessage(true);
     }, 8000);
   }, [hasVirus])
