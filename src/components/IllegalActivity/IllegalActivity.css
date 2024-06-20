@@ -1,0 +1,26 @@
+.illegalActivity {
+    width: 40%;
+    background-color: #FFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.3));
+}
+
+.illegalActivity svg {
+    width: 200px;
+    margin-top: -20px;
+    margin-bottom: 40px;
+}
+
+.illegalActivity h1 {
+    margin-bottom: 18px;
+}
+
+.illegalActivity p {
+    font-size: 12px;
+    line-height: 18px;
+}

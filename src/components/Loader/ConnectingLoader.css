@@ -1,0 +1,52 @@
+#loaderSVG {
+    display: none;
+}
+
+.loader-container {
+    width: 30%;
+    height: 100%;
+    position: relative;
+    filter: url(#gooey);
+}
+
+.loader-container>* {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    background: #8fe507;
+    top: 50%;
+    margin-left: -.5rem;
+    margin-top: -.5rem;
+    border-radius: 50%;
+    animation: loading 2s infinite;
+    transform: scale(.3);
+    opacity: 0;
+}
+.loader-container>*:nth-child(1) {
+    animation-delay: .5s;
+}
+.loader-container>*:nth-child(2) {
+    animation-delay: 1s;
+}
+.loader-container>*:nth-child(3) {
+    animation-delay: 1.5s;
+}
+.loader-container>*:nth-child(4) {
+    animation-delay: 2s;
+}
+
+@keyframes loading {
+    50% {
+        transform: scale(1.25);
+        left: 50%;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(.1);
+        left: 100%;
+        opacity: 0;
+    }
+}

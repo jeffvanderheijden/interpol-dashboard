@@ -1,0 +1,43 @@
+.codeMirrorWrapper {
+    height: 100% !important;
+}
+
+.CodeMirror {
+    height: 100% !important;
+}
+
+.editorContainer {
+    height: calc(100% - 30px);
+    width: 100%;
+    position: relative;
+}
+
+.editorError {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: -26px;
+    width: 100%;
+    z-index: 3;
+    padding: 5px 10px;
+    background-color: red;
+    color: #FFF;
+    font-size: 12px;
+    transition: all .3s;
+}
+
+.editorError.show {
+    bottom: 0px;
+}
+
+.editorError svg {
+    margin-right: 5px;
+}
+
+.editorError b {
+    margin-right: 3px;
+}
+
+.editorError i {
+    margin-left: 3px;
+}

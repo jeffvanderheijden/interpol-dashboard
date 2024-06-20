@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+i {
+    font-style: italic;
+}
+
+a {
+    color: #8fe507;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: #34333c;
+    font-family: "Roboto", sans-serif !important;
+    overflow: hidden;
+}
+
+h1 {
+    font-family: "Quantico", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#___gatsby {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#App {
+    display: flex;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+#desktop {
+    height: calc(100vh - 80px);
+    width: 100%;
+    position: relative;
+    padding: 20px;
+}
+
+#desktopLogo {
+    max-height: 60vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: .1;
+}
+#desktopLogo path {
+    fill: #FFF;
+}
+
+.fileIconContainer {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.fileIcon {
+    width: 50px;
+    margin-bottom: 4px;
+}

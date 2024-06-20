@@ -1,0 +1,51 @@
+#topNav {
+    height: 30px;
+    width: 100%;
+    background-color: #212024;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+#topNav .container {
+    display: flex;
+    flex-direction: row;
+}
+
+#topNav .timeContainer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#topNav svg {
+    max-height: 16px;
+    min-height: 16px;
+    fill: #FFF;
+    margin-left: 6px;
+}
+
+#topNav .time {
+    color: #FFF;
+    font-size: 12px;
+}
+
+#bottomNav {
+    height: 50px;
+    width: 100%;
+    background-color: #212024;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#bottomNav .btn {
+    margin: 0 8px;
+    background: #333;
+}
+#bottomNav .btn:hover,
+#bottomNav .btn.selected {
+    background: #8fe507;
+}

@@ -1,0 +1,18 @@
+.terminal-base {
+    height: calc(100% - 30px) !important;
+    min-height: calc(100% - 30px) !important;
+}
+
+.terminalWarning {
+    font-family: 'Inconsolata', monospace !important;
+    font-size: 0.9em;
+    color: green;
+    white-space: pre-wrap;
+    padding: 20px;
+    height: 100%;
+    background-color: black;
+    text-align: center;
+}
+.terminalWarning p {
+    text-align: left;
+}
