@@ -36,6 +36,7 @@
     "react-globe.gl": "^2.27.2",
     "react-helmet": "^5.2.1",
     "react-inspector": "^6.0.2",
+    "react-powerglitch": "^1.0.3",
     "react-redux": "^7.2.0",
     "react-svg-map": "^2.2.0",
     "source-map": "^0.7.4",

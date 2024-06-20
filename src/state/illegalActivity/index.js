@@ -31,6 +31,7 @@ const illegalActivitySlice = createSlice({
     },
     setVirus: (state, action) => {
       const { payload } = action;
+      console.log('payload', payload)
       state.hasVirus = payload;
       const currentStorage = JSON.parse(LocalStorage.get('interpolStart'));
       LocalStorage.set('interpolStart', JSON.stringify({ ...currentStorage, illegalActivity: state }));

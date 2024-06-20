@@ -3,6 +3,10 @@
     min-height: calc(100% - 30px) !important;
 }
 
+.terminal-base > div > div {
+    overflow-x: hidden;
+}
+
 .terminalWarning {
     font-family: 'Inconsolata', monospace !important;
     font-size: 0.9em;

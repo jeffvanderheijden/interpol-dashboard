@@ -1,0 +1,25 @@
+.systemCompromised {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.systemCompromised h1 {
+    padding: 20px;
+    color: red;
+    border: 3px solid red;
+    display: flex;
+    align-items: center;
+}
+
+.systemCompromised h1 svg {
+    stroke: red !important;
+    margin-right: 10px;
+}
