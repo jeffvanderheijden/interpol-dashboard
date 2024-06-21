@@ -17,9 +17,24 @@
     border: 3px solid red;
     display: flex;
     align-items: center;
+    animation: fadeInOut 2s infinite;
 }
 
 .systemCompromised h1 svg {
     stroke: red !important;
     margin-right: 10px;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

@@ -7,7 +7,7 @@ import { nextStep, pushStep, nextTutorial, tutorialSelector, stepSelector } from
 
 const TutorialNine = () => {
     const dispatch = useDispatch();
-    const totalSteps = 4;
+    const totalSteps = 5;
     const tutorial = useSelector(tutorialSelector) === "tutorialNine";
     const step = useSelector(stepSelector);
 
@@ -62,6 +62,14 @@ const TutorialNine = () => {
                             <h1>EE-AY:</h1>
                             <p>
                                 Open als eerst het FTP-client programma onderin de task bar. <i>(<b style={{ fontWeight: "700" }}>WAARSCHUWING:</b> Wat je ook doet, voer niet het bestand uit via de terminal! Anders wordt het virus geactiveerd op jouw computer).</i>
+                            </p>
+                        </>
+                    )}
+                    {currentStep === 5 && (
+                        <>
+                            <h1>EE-AY:</h1>
+                            <p>
+                                Gebruik het IP-adres dat we hebben gevonden met het "arp -a" commando in de terminal. We hebben de username en password weten te bemachtigen: <b style={{ fontWeight: '700' }}>admin</b> en <b style={{ fontWeight: '700' }}>25#9ke!</b>. Vul deze in en druk op "Connect".  
                             </p>
                         </>
                     )}

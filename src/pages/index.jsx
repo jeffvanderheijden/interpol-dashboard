@@ -7,6 +7,7 @@ import Window from "../components/Window/Window";
 import ServerList from "../components/ServerList/ServerList";
 import Globe from "../components/Globe/GlobeComp";
 import Editor from "../components/Editor/Editor";
+import FTPClient from "../components/FTPClient/FTPClient";
 import CustomTerminal from "../components/Terminal/Terminal";
 import TutorialOne from "../components/Tutorial/TutorialOne";
 import TutorialTwo from "../components/Tutorial/TutorialTwo";
@@ -27,12 +28,13 @@ const IndexPage = () => {
   const initialValue = useSelector(fileVisibleContent);
   const fileVisible = useSelector(fileVisibleSelector);
 
-  const [editorState, setEditorState] = useState(initialValue); 
+  const [editorState, setEditorState] = useState(initialValue);
   const [windows, setWindows] = useState([
-    { name: "Terminal", open: false, invisible: false, selected: false, left: 20, top: 20 },
-    { name: "ServerList", open: false, invisible: false, selected: false, left: 60, top: 60 },
-    { name: "SateliteView", open: false, invisible: false, selected: false, left: 100, top: 100 },
-    { name: "CodeEditor", open: false, invisible: true, selected: false, left: 140, top: 140 }
+    { name: "ServerList", open: false, invisible: false, selected: false, left: 20, top: 20 },
+    { name: "Terminal", open: false, invisible: false, selected: false, left: 60, top: 60 },
+    { name: "CodeEditor", open: false, invisible: true, selected: false, left: 100, top: 100 },
+    { name: "FTPClient", open: false, invisible: false, selected: false, left: 140, top: 140 },
+    { name: "SateliteView", open: false, invisible: true, selected: false, left: 200, top: 200 }
   ]);
 
   useEffect(() => {
@@ -41,7 +43,6 @@ const IndexPage = () => {
 
   const hideEditor = () => {
     if (window.name === "CodeEditor" && !fileVisible) {
-      console.log(fileVisible)
       return false;
     } else {
       return true;
@@ -82,6 +83,9 @@ const IndexPage = () => {
                       windows={windows}
                       setWindows={setWindows}
                     />
+                  )}                  
+                  {window.name === "FTPClient" && (
+                    <FTPClient />
                   )}
                 </Window>
               )}
