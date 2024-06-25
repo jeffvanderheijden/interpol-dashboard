@@ -34,7 +34,7 @@ const IndexPage = () => {
     { name: "Terminal", open: false, invisible: false, selected: false, left: 60, top: 60 },
     { name: "CodeEditor", open: false, invisible: true, selected: false, left: 100, top: 100 },
     { name: "FTPClient", open: false, invisible: false, selected: false, left: 140, top: 140 },
-    { name: "SateliteView", open: false, invisible: true, selected: false, left: 200, top: 200 }
+    { name: "SateliteView", open: false, invisible: true, selected: false, left: 180, top: 180 }
   ]);
 
   useEffect(() => {

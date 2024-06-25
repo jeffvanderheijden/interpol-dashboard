@@ -51,6 +51,8 @@ const FTPClient = () => {
         setTimeout(() => {
             setUploading(false);
             setUploaded(true);
+            // last tutorial step
+            
         }, 3000);
     }
 

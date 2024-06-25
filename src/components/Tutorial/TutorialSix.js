@@ -48,7 +48,7 @@ const TutorialSix = () => {
                         <>
                             <h1>EE-AY:</h1>
                             <p>
-                                Om dit te doen moeten we een bestand aanmaken met een virus erin. Dit kan met het commando "echo 'virus' > definitely_not_a_virus.txt". Hiermee maken we een bestand aan met de naam definitely_not_a_virus.txt en de inhoud "virus".
+                                Om dit te doen moeten we een bestand aanmaken met een virus erin. Dit kan met het commando <code>echo 'virus' > definitely_not_a_virus.txt</code>. Hiermee maken we een bestand aan met de naam definitely_not_a_virus.txt en de inhoud "virus".
                             </p>
                         </>
                     )}

@@ -1,6 +1,18 @@
 const path = require('path');
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: [/react-globe.gl/, /codemirror/],
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
   actions.setWebpackConfig({
     module: {
       rules: [

@@ -44,7 +44,7 @@ const Editor = ({
     useEffect(() => {
         let timerId = null;
         window && window.addEventListener("keydown", (e) => {
-            if ((window.navigator.userAgent.includes('Mac') !== false ? (e.metaKey && e.key === "s") : (e.key === "s" && e.ctrlKey))) {
+            if ((window.navigator && window.navigator.userAgent.includes('Mac') !== false ? (e.metaKey && e.key === "s") : (e.key === "s" && e.ctrlKey))) {
                 e.preventDefault();
                 // Checking if code exists in editor
                 if (!editorRef.current) return;
