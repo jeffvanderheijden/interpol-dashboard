@@ -1,8 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { navigate } from "gatsby";
 import "./FTPClient.css";
 import ConnectingLoader from "./../Loader/ConnectingLoader";
+import { pushTutorial } from "../../state/tutorial";
 
 const FTPClient = () => {
+    const dispatch = useDispatch();
     const [connected, setConnected] = useState(false);
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState(null);
@@ -13,48 +17,50 @@ const FTPClient = () => {
     const passwordRef = useRef(null);
     const ftpErrorRef = useRef(null);
 
-    const checkLogin = () => {
-        // Check if the user has entered the correct credentials
-        // const checkOne = hostRef.current.value === "192.168.211.194";
-        // const checkTwo = usernameRef.current.value === "admin";
-        // const checkThree = passwordRef.current.value === "25#9ke!";
-        setLoading(true);
-        // For debugging
-        const checkOne = hostRef.current.value === "";
-        const checkTwo = usernameRef.current.value === "";
-        const checkThree = passwordRef.current.value === "";
-        setTimeout(() => {
-            if (checkOne && checkTwo && checkThree) {
-                setConnected(true);
-                if (ftpErrorRef && ftpErrorRef.current && ftpErrorRef.current.className === "ftpError show") {
-                    ftpErrorRef.current.className = "ftpError";
+    useEffect(() => {
+        console.log(uploaded);
+    }, [])
+
+    useEffect(() => {
+        if (hostRef && hostRef.current && usernameRef && usernameRef.current && passwordRef && passwordRef.current) {
+            // Check if the user has entered the correct credentials
+            // const checkOne = hostRef.current.value === "192.168.211.194";
+            // const checkTwo = usernameRef.current.value === "admin";
+            // const checkThree = passwordRef.current.value === "25#9ke!";        
+            // For debugging
+            const checkOne = hostRef.current.value === "";
+            const checkTwo = usernameRef.current.value === "";
+            const checkThree = passwordRef.current.value === "";
+            const fakeLogin = setTimeout(() => {
+                if (checkOne && checkTwo && checkThree) {
+                    setConnected(true);
+                    if (ftpErrorRef && ftpErrorRef.current && ftpErrorRef.current.className === "ftpError show") {
+                        ftpErrorRef.current.className = "ftpError";
+                    }
+                } else {
+                    if (ftpErrorRef && ftpErrorRef.current.className !== "ftpError show") {
+                        ftpErrorRef.current.className = "ftpError show";
+                    }
                 }
-            } else {
-                if (ftpErrorRef && ftpErrorRef.current.className !== "ftpError show") {
-                    ftpErrorRef.current.className = "ftpError show";
-                }
-            }
-            setLoading(false);
-        }, 4000);
-    }
+                setLoading(false);
+            }, 4000);
+            return () => { clearTimeout(fakeLogin) }
+        }
+    }, [loading]);
 
-    const logout = () => {
-        setConnected(false);
-    }
+    useEffect(() => {
+        if (uploading === false) return;
 
-    const select = () => {
-        setSelected(true);
-    }
-
-    const upload = () => {
-        setUploading(true);
-        setTimeout(() => {
+        dispatch(pushTutorial('tutorialFinal'));
+        const pushToDash = setTimeout(() => {
             setUploading(false);
             setUploaded(true);
             // last tutorial step
-            
+            console.log('navigate pls')
+            navigate("/dashboard", { replace: true });
         }, 3000);
-    }
+        return () => { clearTimeout(pushToDash) }
+    }, [uploading])
 
     return (
         <div id="ftpClient">
@@ -63,13 +69,13 @@ const FTPClient = () => {
                     <input type="text" placeholder="Host" ref={hostRef} />
                     <input type="text" placeholder="Username" ref={usernameRef} />
                     <input type="password" placeholder="Password" ref={passwordRef} />
-                    <button onClick={() => { checkLogin() }}>Connect</button>
+                    <button onClick={() => { setLoading(true) }}>Connect</button>
                 </div>
             ) : (
                 <div className="loggedIn">
                     <p>Connected to:</p>
                     <p>192.168.211.194</p>
-                    <button onClick={() => { logout() }}>Disconnect</button>
+                    <button onClick={() => { setConnected(false) }}>Disconnect</button>
                 </div>
             )}
             {connected ? (
@@ -77,7 +83,7 @@ const FTPClient = () => {
                     <div className="local">
                         <div className="directory">User/Agent/Desktop/</div>
                         <div className="files">
-                            <div className={`file ${!uploaded && selected ? 'selected' : ''}`} onClick={() => { select() }}>
+                            <div className={`file ${!uploaded && selected ? 'selected' : ''}`} onClick={() => { setSelected(true) }}>
                                 <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="14px" height="14px">
                                     <path d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z"/>
                                 </svg> 
@@ -89,7 +95,7 @@ const FTPClient = () => {
                         <div className="directory">/Server/httpdocs/</div>
                         <div className="files">
                             {uploaded && (
-                                <div className={'file'} onClick={() => { select() }}>
+                                <div className={'file'} onClick={() => { setSelected(true) }}>
                                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="14px" height="14px">
                                         <path d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z"/>
                                     </svg> 
@@ -100,7 +106,7 @@ const FTPClient = () => {
                     </div>
                     {!uploaded && (
                         <div className="ftpActions">
-                            <button onClick={() => { upload() }} className={`${selected ? '' : 'disabled'}`}>Upload</button>
+                            <button onClick={() => { setUploading(true) }} className={`${selected ? '' : 'disabled'}`}>Upload</button>
                         </div>
                     )}
                     {uploading && (

@@ -1,0 +1,49 @@
+#createTeam {
+    color: #FFF;
+    padding: 20px;
+    font-size: 12px;
+}
+#createTeam h1 {
+    text-transform: uppercase;
+}
+#createTeam p {
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+#createTeam .teamImage {    
+    border-radius: 999px;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+#createTeam label span {
+    width: 100%;
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+#createTeam input {
+    width: 100%;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+}
+#createTeam input.half {
+    width: 48%;   
+}
+
+#createTeam form div > input {
+    margin-left: 4%;
+}
+
+.camera {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+}

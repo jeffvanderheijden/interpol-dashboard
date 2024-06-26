@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Redux-Toolkit`,
+    title: `Interpol Dashboard`,
     description: `Gatsby, Redux-Toolkit, Styled Components & Tailwind CSS starter`,
-    author: `Saimir Kapaj`
+    author: `J. van der Heijden`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -27,7 +27,6 @@ module.exports = {
         icon: `src/assets/images/gatsby-icon.png`
       }
     },
-    `gatsby-plugin-offline`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-tailwindcss`,
