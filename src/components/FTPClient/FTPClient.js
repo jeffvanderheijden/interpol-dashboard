@@ -4,6 +4,7 @@ import { navigate } from "gatsby";
 import "./FTPClient.css";
 import ConnectingLoader from "./../Loader/ConnectingLoader";
 import { pushTutorial } from "../../state/tutorial";
+import { setFileVisibleContent } from "../../state/fileState";
 
 const FTPClient = () => {
     const dispatch = useDispatch();
@@ -16,10 +17,6 @@ const FTPClient = () => {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
     const ftpErrorRef = useRef(null);
-
-    useEffect(() => {
-        console.log(uploaded);
-    }, [])
 
     useEffect(() => {
         if (hostRef && hostRef.current && usernameRef && usernameRef.current && passwordRef && passwordRef.current) {
@@ -52,11 +49,11 @@ const FTPClient = () => {
         if (uploading === false) return;
 
         dispatch(pushTutorial('tutorialFinal'));
+        dispatch(setFileVisibleContent(false));
         const pushToDash = setTimeout(() => {
             setUploading(false);
             setUploaded(true);
             // last tutorial step
-            console.log('navigate pls')
             navigate("/dashboard", { replace: true });
         }, 3000);
         return () => { clearTimeout(pushToDash) }

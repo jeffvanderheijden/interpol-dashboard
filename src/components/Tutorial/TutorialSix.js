@@ -40,7 +40,7 @@ const TutorialSix = () => {
                         <>
                             <h1>EE-AY:</h1>
                             <p>
-                                Goed gedaan! Dit lijkt inderdaad op een IP adres dat niet van het GLR afkomstig is. Nu we dit IP adres weten kunnen we onze malafide bestanden naar de hacker toe sturen en zo zijn / haar identiteit achterhalen!
+                                Goed gedaan! Dit lijkt inderdaad op een IP adres dat niet van het GLR afkomstig is. Nu we dit IP adres weten kunnen we een virus naar de hacker toe sturen en zo zijn / haar identiteit achterhalen!
                             </p>
                         </>
                     )}

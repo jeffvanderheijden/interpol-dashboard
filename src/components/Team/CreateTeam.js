@@ -3,24 +3,24 @@ import "./CreateTeam.css";
 
 const CreateTeam = () => {
     const [camera, setCamera] = useState(false);
+    const [streaming, setStreaming] = useState(false);
+    const [width, setWidth] = useState(null);
+    const [height, setHeight] = useState(null);
     const cameraRef = useRef(null);
     const canvasRef = useRef(null);
     const videoRef = useRef(null);
+    const photoRef = useRef(null);
     const takePhotoRef = useRef(null);
-
-    const showCamera = (e) => {
-        e.preventDefault();
-        setCamera(true);
-    }
+    const finalImageRef = useRef(null);
 
     const getVideoStream = async () => {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            clearPicture();
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
             if (videoRef && videoRef.current) {
-                let video = videoRef.current;
-                video.srcObject = stream;
-                video.addEventListener("loadedmetadata", () => {
-                    video.play();
+                videoRef.current.srcObject = stream;
+                videoRef.current.addEventListener("loadedmetadata", () => {
+                    videoRef.current.play();
                 });
             } else {
                 return;
@@ -28,66 +28,121 @@ const CreateTeam = () => {
         } catch (err) {
             console.error(err)
         }
+        
+        if (videoRef && videoRef.current) {
+            videoRef.current.addEventListener("canplay", () => {
+                if (!streaming) {
+                    setHeight(videoRef.current.videoHeight / (videoRef.current.videoWidth / width));
+
+                    // Firefox currently has a bug where the height can't be read from
+                    // the video, so we will make assumptions if this happens.
+
+                    if (isNaN(height)) {
+                        setHeight(width / (4 / 3));
+                    }
+
+                    videoRef.current.setAttribute("width", width);
+                    videoRef.current.setAttribute("height", height);
+                    canvasRef.current.setAttribute("width", width);
+                    canvasRef.current.setAttribute("height", height);
+                    setStreaming(true);
+                }
+            }, false);
+        }
+    }
+
+    function clearPicture() {
+        if (canvasRef && canvasRef.current && photoRef && photoRef.current) {
+            const context = canvasRef.current.getContext("2d");
+            context.fillStyle = "#000";
+            context.fillRect(0, 0, canvasRef.current.offsetHeight, canvasRef.current.offsetWidth);
+
+            const data = canvasRef.current.toDataURL("image/png");
+            photoRef.current.setAttribute("src", data);
+        }
+    }
+
+    const takePicture = (e) => {
+        if (canvasRef && canvasRef.current && photoRef && photoRef.current && videoRef && videoRef.current && finalImageRef && finalImageRef.current) {
+            const context = canvasRef.current.getContext("2d");
+            if (width && height) {
+                canvasRef.current.width = width;
+                canvasRef.current.height = height;
+                context.drawImage(videoRef.current, 0, 0, width, height);
+
+                const data = canvasRef.current.toDataURL("image/png");
+                photoRef.current.setAttribute("src", data);
+                finalImageRef.current.setAttribute("src", data);
+            } else {
+                clearPicture();
+            }
+        }
+        e.preventDefault();
     }
 
     useEffect(() => {
-        getVideoStream();
-    }, [])
+        camera && getVideoStream();
+    }, [camera]);
 
-        return (
-            <div id="createTeam">
-                <h1>Create Team</h1>
-                <p>
-                    You are now going to work in a group of 3 students to unmask the hacker.
-                </p>
-                <div className="teamImage" onClick={(e) => { showCamera(e) }} onKeyDown={(e) => { showCamera(e) }}>
-                    <img src="https://via.placeholder.com/150" alt="Team" />
-                </div>
-                <form action="/api/new-team">
-                    <input type="hidden" id="image" name="image" />
-                    <input type="text" placeholder="Team naam" />
-                    <div>
-                        <label>
-                            <span>Student 1</span>
-                            <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" />
-                        </label>
-                        <input className="half" type="text" placeholder="Student nummer" />
-                    </div>
-                    <div>
-                        <label>
-                            <span>Student 2</span>
-                            <input className="half" type="text" id="student2" name="student2" placeholder="Student voornaam" />
-                        </label>
-                        <input className="half" type="text" placeholder="Student nummer" />
-                    </div>
-                    <div>
-                        <label>
-                            <span>Student 3</span>
-                            <input className="half" type="text" id="student3" name="student3" placeholder="Student voornaam" />
-                        </label>
-                        <input className="half" type="text" placeholder="Student nummer" />
-                    </div>
-                    <label>
-                        <span>Klas</span>
-                        <input type="text" id="klas" name="klas" placeholder="Studenten klas" />
-                    </label>
-                    <input type="submit" value="Create Team" />
-                </form>
-                {camera && (
-                    <div>
-                        <canvas id="canvas" ref={canvasRef} />
-                        <div className="output">
-                            <img id="photo" alt="The screen capture will appear in this box." />
-                        </div>
+    useEffect(() => {
+        setWidth(200);
+    }, []);
 
-                        <div className="camera" ref={cameraRef}>
-                            <video ref={videoRef} id="video">Video stream not available.</video>
-                            <button ref={takePhotoRef} type="button" id="startbutton" className="btn">Take photo</button>
-                        </div>
-                    </div>
-                )}
+    return (
+        <div id="createTeam">
+            <h1>Create Team</h1>
+            <p>
+                You are now going to work in a group of 3 students to unmask the hacker.
+            </p>
+            <div className="teamImage" onClick={(e) => { setCamera(true) }} onKeyDown={(e) => { setCamera(true) }}>
+                <img src="https://via.placeholder.com/150" ref={finalImageRef} alt="Team" />
             </div>
-        )
-    }
+            <form action="/api/new-team">
+                <input type="hidden" id="image" name="image" />
+                <input type="text" id="teamName" placeholder="Team naam" />
+                <input type="text" id="klas" name="klas" placeholder="Klas" />
+                <div>
+                    <label>
+                        <span>Student 1</span>
+                        <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" />
+                    </label>
+                    <input className="half" type="text" placeholder="Student nummer" />
+                </div>
+                <div>
+                    <label>
+                        <span>Student 2</span>
+                        <input className="half" type="text" id="student2" name="student2" placeholder="Student voornaam" />
+                    </label>
+                    <input className="half" type="text" placeholder="Student nummer" />
+                </div>
+                <div>
+                    <label>
+                        <span>Student 3</span>
+                        <input className="half" type="text" id="student3" name="student3" placeholder="Student voornaam" />
+                    </label>
+                    <input className="half" type="text" placeholder="Student nummer" />
+                </div>
+                <div className="buttonWrapper">
+                    <button type="button" className="btn"><span>Create team</span></button>
+                </div>
+            </form>
+            {camera && (
+                <div className="camera" ref={cameraRef}>
+                    <video ref={videoRef} id="video">Video stream not available.</video>
+                    <div className="buttonWrapper">
+                        <button onClick={(e) => { takePicture(e) }} ref={takePhotoRef} type="button" id="startbutton" className="btn"><span>Take photo</span></button>
+                        <button onClick={() => { setCamera(false) }} type="button" id="savebutton" className="btn"><span>Save photo</span></button>
+                    </div>
+                    <div className="output">
+                        <div className="imgWrapper">
+                            <img ref={photoRef} id="photo" alt="Team image" />
+                        </div>
+                        <canvas id="canvas" ref={canvasRef} />
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+}
 
-    export default CreateTeam;
+export default CreateTeam;

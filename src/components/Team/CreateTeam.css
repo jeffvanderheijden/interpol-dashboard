@@ -10,6 +10,13 @@
     margin-top: 8px;
     margin-bottom: 16px;
 }
+#createTeam #teamName {
+    width: 65%;
+}
+#createTeam #klas {
+    width: 31%;
+    margin-left: 4%;
+}
 #createTeam .teamImage {    
     border-radius: 999px;
     width: 150px;
@@ -18,6 +25,9 @@
     margin: 0 auto;
     margin-bottom: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #createTeam label span {
     width: 100%;
@@ -30,9 +40,19 @@
     padding: 10px 10px;
     border: none;
     border-radius: 5px;
+    border: 2px solid transparent;
+}
+#createTeam input:focus {
+    outline: none !important;
+    border: 2px solid #8fe507;
 }
 #createTeam input.half {
     width: 48%;   
+}
+
+#createTeam #video {
+    width: 100%;
+    height: auto;
 }
 
 #createTeam form div > input {
@@ -46,4 +66,32 @@
     top: 0;
     left: 0;
     background: black;
+}
+
+.camera .output {
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
+}
+
+.camera canvas {
+    display: none;
+}
+
+.camera .imgWrapper {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 99px;
+    margin: 0 auto;
+}
+
+#createTeam .buttonWrapper {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

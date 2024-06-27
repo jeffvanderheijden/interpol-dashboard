@@ -37,7 +37,7 @@ const TutorialEight = () => {
                         <>
                             <h1>EE-AY:</h1>
                             <p>
-                                Nu dat we het bestand hebben geopend, moeten we ons virus erin zetten. Download <a href="/static/definitely_not_a_virus.txt" download>hier</a> een bestand, gebruik Visual Studio Code om het bestand te openen. Kopieer en plak daarna de code in deze teksteditor. Sla het bestand daarna op met de sneltoets: CMD + S.
+                                Nu dat we het bestand hebben geopend, moeten we ons virus erin zetten. Download <a href="/static/definitely_not_a_virus.txt" download>hier</a> een bestand, gebruik Visual Studio Code om het bestand te openen. Kopieer en plak daarna de code in deze teksteditor. Sla het bestand daarna op met de sneltoets: CMD + S. (Of CTRL + S op windows)
                             </p>
                         </>
                     )}
