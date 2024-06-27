@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import TakePhoto from "./../../assets/images/take-photo.png";
 import "./CreateTeam.css";
 
 const CreateTeam = () => {
@@ -95,7 +96,7 @@ const CreateTeam = () => {
                 You are now going to work in a group of 3 students to unmask the hacker.
             </p>
             <div className="teamImage" onClick={(e) => { setCamera(true) }} onKeyDown={(e) => { setCamera(true) }}>
-                <img src="https://via.placeholder.com/150" ref={finalImageRef} alt="Team" />
+                <img src={TakePhoto} ref={finalImageRef} alt="Team" />
             </div>
             <form action="/api/new-team">
                 <input type="hidden" id="image" name="image" />

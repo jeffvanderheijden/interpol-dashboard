@@ -21,13 +21,13 @@ const FTPClient = () => {
     useEffect(() => {
         if (hostRef && hostRef.current && usernameRef && usernameRef.current && passwordRef && passwordRef.current) {
             // Check if the user has entered the correct credentials
-            // const checkOne = hostRef.current.value === "192.168.211.194";
-            // const checkTwo = usernameRef.current.value === "admin";
-            // const checkThree = passwordRef.current.value === "25#9ke!";        
+            const checkOne = hostRef.current.value === "192.168.211.194";
+            const checkTwo = usernameRef.current.value === "admin";
+            const checkThree = passwordRef.current.value === "25#9ke!";        
             // For debugging
-            const checkOne = hostRef.current.value === "";
-            const checkTwo = usernameRef.current.value === "";
-            const checkThree = passwordRef.current.value === "";
+            // const checkOne = hostRef.current.value === "";
+            // const checkTwo = usernameRef.current.value === "";
+            // const checkThree = passwordRef.current.value === "";
             const fakeLogin = setTimeout(() => {
                 if (checkOne && checkTwo && checkThree) {
                     setConnected(true);
