@@ -16,15 +16,16 @@ const Login = () => {
             credentials: 'include',  // This is important for sending/receiving cookies
             body: JSON.stringify({ username: userRef.current.value, password: passRef.current.value }),
         });
-
-        const data = await response.json();
-        if (data.success) {
-            console.log('Login successful');
-            // Handle success (e.g., redirect to another page)
-        } else {
-            console.log('Login failed');
-            // Handle failure (e.g., show an error message)
-        }
+        const test = await response;
+        console.log(test);
+        // const data = await response.json();
+        // if (data.success) {
+        //     console.log('Login successful');
+        //     // Handle success (e.g., redirect to another page)
+        // } else {
+        //     console.log('Login failed');
+        //     // Handle failure (e.g., show an error message)
+        // }
     }
     return (
         <form id="loginForm" onSubmit={(e) => { submitForm(e) }}>
