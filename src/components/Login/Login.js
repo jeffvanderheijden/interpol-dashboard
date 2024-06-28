@@ -15,15 +15,9 @@ const Login = () => {
             body: JSON.stringify({ username: userRef.current.value, password: passRef.current.value }),
             credentials: 'include'  // This is important for sending cookies
         })
-        .then(response => response)
-        .then(data => {
-            if (data.success) {
-                // Handle successful login
-                console.log(data);
-            } else {
-                // Handle login error
-                console.log(data);
-            }
+        .then(response => response.json)
+        .then(data => { 
+            console.log(data) 
         });
     }
 
