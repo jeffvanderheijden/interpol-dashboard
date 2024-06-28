@@ -9,7 +9,7 @@ const Login = () => {
     async function submitForm(event) {
         event.preventDefault();
         try {
-            const response = await fetch('https://api.interpol.sd-lab.nl', {
+            const response = await fetch('https://auth.yourdomain.com/your-php-backend-url.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -22,7 +22,6 @@ const Login = () => {
             });
     
             const data = await response.json();
-            console.log(data);
     
             if (data.status === 'success') {
                 // Login successful, the cookie will be set by the server
