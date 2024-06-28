@@ -9,7 +9,7 @@ const Login = () => {
     async function submitForm(event) {
         event.preventDefault();
         try {
-            const response = await fetch('https://auth.yourdomain.com/your-php-backend-url.php', {
+            const response = await fetch('https://api.interpol.sd-lab.nl/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
