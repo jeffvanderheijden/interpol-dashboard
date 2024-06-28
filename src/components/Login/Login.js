@@ -22,6 +22,7 @@ const Login = () => {
                 console.log(data);
             } else {
                 // Handle login error
+                console.log(data);
             }
         });
     }
