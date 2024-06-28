@@ -8,22 +8,30 @@ const Login = () => {
     // Example function to handle login
     async function submitForm(event) {
         event.preventDefault();
-        const response = await fetch('https://api.interpol.sd-lab.nl', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',  // This is important for sending/receiving cookies
-            body: JSON.stringify({ username: userRef.current.value, password: passRef.current.value }),
-        });
-
-        const data = await response.json();
-        if (data.success) {
-            console.log('Login successful');
-            // Handle success (e.g., redirect to another page)
-        } else {
-            console.log('Login failed');
-            // Handle failure (e.g., show an error message)
+        try {
+            const response = await fetch('https://api.interpol.sd-lab.nl', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    username: userRef.current.value,
+                    password: passRef.current.value
+                }),
+                credentials: 'include' // This ensures cookies are included in requests
+            });
+    
+            const data = await response.json();
+    
+            if (data.status === 'success') {
+                // Login successful, the cookie will be set by the server
+                console.log('Login successful');
+            } else {
+                // Login failed
+                console.log('Login failed:', data.message);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
         }
     }
 
