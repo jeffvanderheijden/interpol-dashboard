@@ -3,6 +3,7 @@ import NoSSR from '../components/NoSSR/NoSSR';
 import Window from "../components/Window/Window";
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
+import Login from "../components/Login/Login";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import TutorialFinal from "../components/Tutorial/TutorialFinal";
@@ -10,7 +11,8 @@ import TutorialFinal from "../components/Tutorial/TutorialFinal";
 const DashboardPage = () => {
     const [windows, setWindows] = useState([
         { name: "CreateTeam", open: false, invisible: false, selected: false, left: 20, top: 20 },
-        { name: "SateliteView", open: false, invisible: false, selected: false, left: 60, top: 60 }
+        { name: "Login", open: false, invisible: false, selected: false, left: 60, top: 60 },
+        { name: "SateliteView", open: false, invisible: false, selected: false, left: 100, top: 100 }
     ]);
 
     return (
@@ -32,6 +34,9 @@ const DashboardPage = () => {
                             )}
                             {window.name === "CreateTeam" && (
                                 <CreateTeam />
+                            )}
+                            {window.name === "Login" && (
+                                <Login />
                             )}
                             </Window>
                         )}
