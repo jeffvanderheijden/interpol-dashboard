@@ -22,6 +22,7 @@ const Login = () => {
             });
     
             const data = await response.json();
+            console.log(data);
     
             if (data.status === 'success') {
                 // Login successful, the cookie will be set by the server
