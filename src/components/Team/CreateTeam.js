@@ -7,6 +7,7 @@ const CreateTeam = () => {
     const [streaming, setStreaming] = useState(false);
     const [width, setWidth] = useState(null);
     const [height, setHeight] = useState(null);
+    const [image, setImage] = useState(null);
     const cameraRef = useRef(null);
     const canvasRef = useRef(null);
     const videoRef = useRef(null);
@@ -72,6 +73,7 @@ const CreateTeam = () => {
                 context.drawImage(videoRef.current, 0, 0, width, height);
 
                 const data = canvasRef.current.toDataURL("image/png");
+                setImage(data);
                 photoRef.current.setAttribute("src", data);
                 finalImageRef.current.setAttribute("src", data);
             } else {
@@ -80,6 +82,27 @@ const CreateTeam = () => {
         }
         e.preventDefault();
     }
+
+    const uploadPicture = async () => {
+        const formData = new FormData();
+        formData.append('image', image);
+
+        try {
+            const response = await fetch('https://api.jeffvanerheijden.nl/api/upload-team-image', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+            } else {
+                console.error('Error uploading the image:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error uploading the image:', error);
+        }
+    };
 
     useEffect(() => {
         camera && getVideoStream();
@@ -93,7 +116,7 @@ const CreateTeam = () => {
         <div id="createTeam">
             <h1>Create Team</h1>
             <p>
-                You are now going to work in a group of 3 students to unmask the hacker.
+                You are now going to work in a group of 4 students to unmask the hacker.
             </p>
             <div className="teamImage" onClick={(e) => { setCamera(true) }} onKeyDown={(e) => { setCamera(true) }}>
                 <img src={TakePhoto} ref={finalImageRef} alt="Team" />
@@ -124,7 +147,7 @@ const CreateTeam = () => {
                     <input className="half" type="text" placeholder="Student nummer" />
                 </div>
                 <div className="buttonWrapper">
-                    <button type="button" className="btn"><span>Create team</span></button>
+                    <button onClick={() => { uploadPicture() }} type="button" className="btn"><span>Create team</span></button>
                 </div>
             </form>
             {camera && (

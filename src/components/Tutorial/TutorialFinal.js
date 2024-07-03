@@ -45,7 +45,7 @@ const TutorialFinal = () => {
                         <>
                             <h1>Agent X:</h1>
                             <p>
-                                Je gaat nu in een groep van 3 studenten aan de slag om de hacker te ontmaskeren. Je zult per groep een "Node" van het BotNet gaan uitschakelen. Pas als we alle bots hebben kunnen vernietigen weten we waar de hacker zich exact bevindt. Begin met het maken van een team met 2 andere studenten door te klikken op: "CreateTeam".
+                                Je gaat nu in een groep van 4 studenten aan de slag om de hacker te ontmaskeren. Je zult per groep een "Node" van het BotNet gaan uitschakelen. Pas als we alle bots hebben kunnen vernietigen weten we waar de hacker zich exact bevindt. Begin met het maken van een team met 3 andere studenten door te klikken op: "CreateTeam".
                             </p>
                         </>
                     )}
