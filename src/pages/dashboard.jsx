@@ -33,7 +33,10 @@ const DashboardPage = () => {
                                 <Globe />
                             )}
                             {window.name === "CreateTeam" && (
-                                <CreateTeam />
+                                <CreateTeam 
+                                    windows={windows}
+                                    setWindows={setWindows}
+                                />
                             )}
                             {window.name === "Login" && (
                                 <Login />

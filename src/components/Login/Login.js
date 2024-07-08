@@ -1,44 +1,30 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./Login.css";
 
 const Login = () => {
-    const userRef = useRef(null);
-    const passRef = useRef(null);
-
-    // Example function to handle login
-    async function submitForm(event) {
-        event.preventDefault();
+    // LDAP login form
+    async function submitForm(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('username', e.target.elements.username.value);
+        formData.append('password', e.target.elements.password.value);
+        
         try {
-            const response = await fetch('https://api.interpol.sd-lab.nl/', {
+            const response = await fetch('https://api.interpol.sd-lab.nl/api/create-session', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    username: userRef.current.value,
-                    password: passRef.current.value
-                }),
-                credentials: 'include' // This ensures cookies are included in requests
+                body: formData,
             });
-    
-            const data = await response.json();
-    
-            if (data.status === 'success') {
-                // Login successful, the cookie will be set by the server
-                console.log('Login successful');
-            } else {
-                // Login failed
-                console.log('Login failed:', data.message);
-            }
+            const login = response();
+            console.log(login);
         } catch (error) {
-            console.error('Error during login:', error);
+            console.error('Error creating team:', error);
         }
     }
 
     return (
         <form id="loginForm" onSubmit={(e) => { submitForm(e) }}>
-            <input type="text" ref={userRef} placeholder="Studentnummer" />
-            <input type="password" ref={passRef} placeholder="Wachtwoord" />
+            <input type="text" id="username" placeholder="Studentnummer" />
+            <input type="password" id="password" placeholder="Wachtwoord" />
             <button type="submit" className="btn">Inloggen</button>
         </form>
     );

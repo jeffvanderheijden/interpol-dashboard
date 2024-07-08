@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import TakePhoto from "./../../assets/images/take-photo.png";
+import SuccessScreen from "./../SuccessScreen/SuccessScreen";
 import "./CreateTeam.css";
 
-const CreateTeam = () => {
+const CreateTeam = ({
+    windows,
+    setWindows
+}) => {
     const [camera, setCamera] = useState(false);
     const [streaming, setStreaming] = useState(false);
     const [width, setWidth] = useState(null);
     const [height, setHeight] = useState(null);
     const [image, setImage] = useState(null);
+    const [teamSuccessfullyCreated, setTeamSuccessfullyCreated] = useState(false);
     const cameraRef = useRef(null);
     const canvasRef = useRef(null);
     const videoRef = useRef(null);
@@ -30,7 +35,7 @@ const CreateTeam = () => {
         } catch (err) {
             console.error(err)
         }
-        
+
         if (videoRef && videoRef.current) {
             videoRef.current.addEventListener("canplay", () => {
                 if (!streaming) {
@@ -83,26 +88,66 @@ const CreateTeam = () => {
         e.preventDefault();
     }
 
-    const uploadPicture = async () => {
+    const createTeam = async (e) => {
+        e.preventDefault();
         const formData = new FormData();
         formData.append('image', image);
-
+        formData.append('name', e.target.elements.teamName.value);
+        formData.append('class', e.target.elements.klas.value);
+        const students = [
+            {
+                name: e.target.elements.student1.value,
+                number: e.target.elements.student1_number.value
+            },
+            {
+                name: e.target.elements.student2.value,
+                number: e.target.elements.student2_number.value
+            },
+            {
+                name: e.target.elements.student3.value,
+                number: e.target.elements.student3_number.value
+            },
+            {
+                name: e.target.elements.student4.value,
+                number: e.target.elements.student4_number.value
+            }
+        ];
+        formData.append('students', JSON.stringify(students));
+        
         try {
-            const response = await fetch('https://api.jeffvanerheijden.nl/api/upload-team-image', {
+            const response = await fetch('https://api.interpol.sd-lab.nl/api/create-team', {
                 method: 'POST',
                 body: formData,
             });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-            } else {
-                console.error('Error uploading the image:', response.statusText);
+            const newTeam = await response.text();
+            if (JSON.parse(newTeam).message === 'Records inserted successfully') {
+                setTeamSuccessfullyCreated(true);
             }
         } catch (error) {
-            console.error('Error uploading the image:', error);
+            console.error('Error creating team:', error);
         }
     };
+
+    useEffect(() => {
+        if (windows && teamSuccessfullyCreated) {
+            const hideCreateTeam = setTimeout(() => {
+                // Close the team creation window
+                Object.assign(
+                    // target object which will be mutated and also is the return value.
+                    windows.find((mutate) => mutate.name === "CreateTeam"),
+                    // the source objects which properties will be assigned to the target object.
+                    {
+                        open: false,
+                        invisible: true,
+                        selected: false
+                    }
+                );
+                const newWindows = [...windows]; // Because we return a mutated object, we need to create a new array
+                setWindows(newWindows);
+            }, 4000);
+            return () => { clearTimeout(hideCreateTeam) };
+        }        
+    }, [teamSuccessfullyCreated]);
 
     useEffect(() => {
         camera && getVideoStream();
@@ -116,38 +161,47 @@ const CreateTeam = () => {
         <div id="createTeam">
             <h1>Create Team</h1>
             <p>
-                You are now going to work in a group of 4 students to unmask the hacker.
+                You are now going to work in a group of 4 students to unmask the hacker. 
             </p>
-            <div className="teamImage" onClick={(e) => { setCamera(true) }} onKeyDown={(e) => { setCamera(true) }}>
+            <div className="teamImage" onClick={() => { setCamera(true) }} onKeyDown={() => { setCamera(true) }}>
                 <img src={TakePhoto} ref={finalImageRef} alt="Team" />
             </div>
-            <form action="/api/new-team">
-                <input type="hidden" id="image" name="image" />
-                <input type="text" id="teamName" placeholder="Team naam" />
+            <form onSubmit={(e) => { createTeam(e) }}>
+                <input type="hidden" id="image" name="image" value={image} />
+                <input type="text" id="teamName" name="teamName" placeholder="Team naam" />
                 <input type="text" id="klas" name="klas" placeholder="Klas" />
                 <div>
                     <label>
                         <span>Student 1</span>
                         <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" />
                     </label>
-                    <input className="half" type="text" placeholder="Student nummer" />
+                    <input className="half" id="student1_number" name="student1_number" type="text" pattern="\d*" minLength="6" maxLength="6" placeholder="Student nummer" />
                 </div>
                 <div>
                     <label>
                         <span>Student 2</span>
                         <input className="half" type="text" id="student2" name="student2" placeholder="Student voornaam" />
                     </label>
-                    <input className="half" type="text" placeholder="Student nummer" />
+                    <input className="half" type="number" id="student2_number" name="student2_number" placeholder="Student nummer" />
                 </div>
                 <div>
                     <label>
                         <span>Student 3</span>
                         <input className="half" type="text" id="student3" name="student3" placeholder="Student voornaam" />
                     </label>
-                    <input className="half" type="text" placeholder="Student nummer" />
+                    <input className="half" type="number" id="student3_number" name="student3_number" placeholder="Student nummer" />
+                </div>
+                <div>
+                    <label>
+                        <span>Student 4</span>
+                        <input className="half" type="text" id="student4" name="student4" placeholder="Student voornaam" />
+                    </label>
+                    <input className="half" type="number" id="student4_number" name="student4_number" placeholder="Student nummer" />
                 </div>
                 <div className="buttonWrapper">
-                    <button onClick={() => { uploadPicture() }} type="button" className="btn"><span>Create team</span></button>
+                    {!teamSuccessfullyCreated && (
+                        <button type="submit" className="btn"><span>Create team</span></button>
+                    )}
                 </div>
             </form>
             {camera && (
@@ -165,6 +219,7 @@ const CreateTeam = () => {
                     </div>
                 </div>
             )}
+            {teamSuccessfullyCreated && <SuccessScreen />}
         </div>
     )
 }
