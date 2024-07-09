@@ -120,7 +120,7 @@ const CreateTeam = ({
                 body: formData,
             });
             const newTeam = await response.text();
-            console.log(newTeam);
+            console.log(newTeam.message);
             if (JSON.parse(newTeam).message) {
                 setTeamSuccessfullyCreated(true);
                 // Set initial points for the team on completion
@@ -132,7 +132,7 @@ const CreateTeam = ({
                         const response = await fetch('https://api.interpol.sd-lab.nl/api/set-challenge-points', {
                             method: 'POST',
                             body: JSON.stringify({
-                                group_id: JSON.parse(newTeam).message,
+                                group_id: newTeam.message,
                                 challenge_id: 4,
                                 completed: 1,
                                 points: Math.floor(Math.random() * 200) + 100
