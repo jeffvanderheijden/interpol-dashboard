@@ -128,15 +128,15 @@ const CreateTeam = ({
                 // TODO: Set points based on min points and time spend on the challenge
                 // ======================================
                 const setPoints = async () => {
+                    const formData = new FormData();
+                    formData.append('group_id', JSON.parse(newTeam).message);
+                    formData.append('challenge_id', 4);
+                    formData.append('completed', 1);
+                    formData.append('points', Math.floor(Math.random() * 200) + 100);
                     try {
                         const response = await fetch('https://api.interpol.sd-lab.nl/api/set-challenge-points', {
                             method: 'POST',
-                            body: JSON.stringify({
-                                group_id: JSON.parse(newTeam).message,
-                                challenge_id: 4,
-                                completed: 1,
-                                points: Math.floor(Math.random() * 200) + 100
-                            })
+                            body: formData
                         });
                         const success = await response.text();
                         console.log(success);
