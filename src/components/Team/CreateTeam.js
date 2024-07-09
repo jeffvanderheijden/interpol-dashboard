@@ -120,6 +120,7 @@ const CreateTeam = ({
                 body: formData,
             });
             const newTeam = await response.text();
+            console.log(newTeam);
             if (JSON.parse(newTeam).message === 'Records inserted successfully') {
                 setTeamSuccessfullyCreated(true);
             }
