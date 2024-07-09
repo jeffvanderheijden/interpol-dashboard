@@ -191,36 +191,36 @@ const CreateTeam = ({
                 <img src={TakePhoto} ref={finalImageRef} alt="Team" />
             </div>
             <form onSubmit={(e) => { createTeam(e) }}>
-                <input type="hidden" id="image" name="image" value={image} />
-                <input type="text" id="teamName" name="teamName" placeholder="Team naam" />
-                <input type="text" id="klas" name="klas" placeholder="Klas" />
+                <input type="hidden" id="image" name="image" value={image} required />
+                <input type="text" id="teamName" name="teamName" placeholder="Team naam" required />
+                <input type="text" id="klas" name="klas" placeholder="Klas" required />
                 <div>
                     <label>
                         <span>Student 1</span>
-                        <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" />
+                        <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" required />
                     </label>
-                    <input className="half" id="student1_number" name="student1_number" type="text" pattern="\d*" minLength="6" maxLength="6" placeholder="Student nummer" />
+                    <input className="half" id="student1_number" name="student1_number" type="number" pattern="\d*" minLength="6" maxLength="6" placeholder="Student nummer" required />
                 </div>
                 <div>
                     <label>
                         <span>Student 2</span>
-                        <input className="half" type="text" id="student2" name="student2" placeholder="Student voornaam" />
+                        <input className="half" type="text" id="student2" name="student2" placeholder="Student voornaam" required />
                     </label>
-                    <input className="half" type="number" id="student2_number" name="student2_number" placeholder="Student nummer" />
+                    <input className="half" type="number" id="student2_number" name="student2_number" placeholder="Student nummer" pattern="\d*" minLength="6" maxLength="6" required />
                 </div>
                 <div>
                     <label>
                         <span>Student 3</span>
-                        <input className="half" type="text" id="student3" name="student3" placeholder="Student voornaam" />
+                        <input className="half" type="text" id="student3" name="student3" placeholder="Student voornaam" required />
                     </label>
-                    <input className="half" type="number" id="student3_number" name="student3_number" placeholder="Student nummer" />
+                    <input className="half" type="number" id="student3_number" name="student3_number" placeholder="Student nummer" pattern="\d*" minLength="6" maxLength="6" required />
                 </div>
                 <div>
                     <label>
                         <span>Student 4</span>
-                        <input className="half" type="text" id="student4" name="student4" placeholder="Student voornaam" />
+                        <input className="half" type="text" id="student4" name="student4" placeholder="Student voornaam" required />
                     </label>
-                    <input className="half" type="number" id="student4_number" name="student4_number" placeholder="Student nummer" />
+                    <input className="half" type="number" id="student4_number" name="student4_number" placeholder="Student nummer" pattern="\d*" minLength="6" maxLength="6" required />
                 </div>
                 <div className="buttonWrapper">
                     {!teamSuccessfullyCreated && (
