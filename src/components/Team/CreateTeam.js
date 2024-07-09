@@ -138,7 +138,7 @@ const CreateTeam = ({
                             method: 'POST',
                             body: formData
                         });
-                        const success = await response.text();
+                        const success = await response.text()
                         console.log(success);
                     } catch (error) {
                         console.error('Error setting points:', error);
