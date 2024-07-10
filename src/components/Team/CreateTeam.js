@@ -20,6 +20,8 @@ const CreateTeam = ({
     const takePhotoRef = useRef(null);
     const finalImageRef = useRef(null);
 
+    const api = "https://api.jeffvanderheijden.nl/api";
+
     const getVideoStream = async () => {
         try {
             clearPicture();
@@ -115,7 +117,7 @@ const CreateTeam = ({
         formData.append('students', JSON.stringify(students));
         
         try {
-            const response = await fetch('https://api.interpol.sd-lab.nl/api/create-team', {
+            const response = await fetch(`${api}/create-team`, {
                 method: 'POST',
                 body: formData,
             });
@@ -134,7 +136,7 @@ const CreateTeam = ({
                     formData.append('completed', 1);
                     formData.append('points', Math.floor(Math.random() * 200) + 100);
                     try {
-                        const response = await fetch('https://api.interpol.sd-lab.nl/api/set-challenge-points', {
+                        const response = await fetch(`${api}/set-challenge-points`, {
                             method: 'POST',
                             body: formData
                         });
