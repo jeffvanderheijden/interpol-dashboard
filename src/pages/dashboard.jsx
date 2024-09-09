@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NoSSR from '../components/NoSSR/NoSSR';
-import Window from "../components/Window/Window";
+import Window from "../components/Window/Window"
+import { checkSession } from "./../helpers/data/dataLayer";;
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
 import Login from "../components/Login/Login";
@@ -14,6 +15,18 @@ const DashboardPage = () => {
         { name: "Login", open: false, invisible: false, selected: false, left: 60, top: 60 },
         { name: "SateliteView", open: false, invisible: false, selected: false, left: 100, top: 100 }
     ]);
+
+    // Check if user is logged in as student or teacher
+    useEffect(() => {
+        checkSession("STUDENT").then(hasSession => {
+            // if student, go to dashboard
+            !hasSession && navigate('/login');
+        });
+        checkSession("DOCENT").then(hasSession => {
+            // if teacher, go to admin panel
+            !hasSession && navigate('/login');
+        });
+    }, []);
 
     return (
         <NoSSR>

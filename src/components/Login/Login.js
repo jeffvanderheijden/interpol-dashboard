@@ -1,67 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { navigate } from "@reach/router";
+import { checkSession, login } from "./../../helpers/data/dataLayer";
 import "./Login.css";
 
 const Login = () => {
     // LDAP login form
-    async function submitForm(e) {
+    const submitForm = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('username', e.target.elements.username.value);
         formData.append('password', e.target.elements.password.value);
-        
-        try {
-            const response = await fetch('https://api.interpol.sd-lab.nl/api/create-session', {
-                method: 'POST',
-                body: formData,
-                credentials: 'include' // Ensure cookies are included with the request
-            });
 
-            // Check if the response is OK (status in the range 200-299)
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const login = await response.json();
-
-            // Check if the login was successful
-            if (login.message === 'Docent ingelogd' && login.session) {
-                sessionStorage.setItem('dashboard', JSON.stringify(login.session));
-            } else if(login.message === 'Student ingelogd' && login.session) {
-                // ============================================================
-                // TODO: Check functionality with mock student on LDAP
-                // ============================================================
-
-                // Get the group info and store into session storage
-                const student = await fetch('https://api.interpol.sd-lab.nl/api/student-and-group',  + new URLSearchParams({ id: login.session.ingelogdAls }).toString());
-                
-                // Check if the response is OK (status in the range 200-299)
-                if (!student.ok) {
-                    throw new Error(`HTTP error! Status: ${student.status}`);
-                }
-                
-                const studentData = await response.json();
-
-                if (studentData.message === 'Student en groep opgehaald') {
-                    login.session.studentData = studentData.studentData;
-                }
-
-                sessionStorage.setItem('dashboard', JSON.stringify(login.session));
-            } else {
-                console.error('Er ging iets fout met inloggen:', login.message);
-                sessionStorage.clear();
-            }
-        } catch (error) {
-            console.error('Error creating team:', error);
-            sessionStorage.clear();
-        }
+        login(formData);
     }
 
+    // Check if user is logged in as student or teacher
+    useEffect(() => {
+        checkSession("STUDENT").then(hasSession => {
+            // if student, go to dashboard
+            hasSession && navigate('/dashboard');
+        });
+        checkSession("DOCENT").then(hasSession => {
+            // if teacher, go to admin panel
+            hasSession && navigate('/docent-dashboard');
+        });
+    }, []);
+
     return (
-        <form id="loginForm" onSubmit={(e) => { submitForm(e) }}>
-            <input type="text" id="username" placeholder="Studentnummer" />
-            <input type="password" id="password" placeholder="Wachtwoord" />
-            <button type="submit" className="btn">Inloggen</button>
-        </form>
+        <div id="loginWrapper">
+            <form id="loginForm" onSubmit={(e) => { submitForm(e) }}>
+                <input type="text" id="username" placeholder="Username" />
+                <input type="password" id="password" placeholder="Password" />
+                <button type="submit" className="btn"><span>Inloggen</span></button>
+            </form>
+        </div>
     );
 }
 
