@@ -35,7 +35,7 @@ const Login = () => {
                 }
                 
                 const studentData = await response.json();
-                
+                console.log(studentData);
                 if (studentData.message === 'Student en groep opgehaald') {
                     login.session.studentData = studentData.studentData;
                 }
