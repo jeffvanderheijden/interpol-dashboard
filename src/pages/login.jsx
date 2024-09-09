@@ -22,8 +22,8 @@ const LoginPage = () => {
     return (
         <NoSSR>
             <Layout>
-                <Login />
                 <SEO title="Login" />
+                <Login />
             </Layout>
         </NoSSR>
     );
