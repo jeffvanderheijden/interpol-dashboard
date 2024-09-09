@@ -60,5 +60,3 @@ export const checkSession = async (type) => {
         return false;
     }
 }
-
-export default dataLayer;

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
+import { navigate } from "@reach/router";
 import NoSSR from '../components/NoSSR/NoSSR';
 import { checkSession } from "./../helpers/data/dataLayer";
 import Login from "../components/Login/Login";
-import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
 const LoginPage = () => {
@@ -21,10 +21,8 @@ const LoginPage = () => {
 
     return (
         <NoSSR>
-            <Layout>
-                <SEO title="Login" />
-                <Login />
-            </Layout>
+            <SEO title="Login" />
+            <Login />
         </NoSSR>
     );
 }

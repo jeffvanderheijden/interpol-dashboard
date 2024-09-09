@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { navigate } from "@reach/router";
 import NoSSR from '../components/NoSSR/NoSSR';
 import Window from "../components/Window/Window"
-import { checkSession } from "./../helpers/data/dataLayer";;
+import { checkSession } from "./../helpers/data/dataLayer";
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
 import Login from "../components/Login/Login";
