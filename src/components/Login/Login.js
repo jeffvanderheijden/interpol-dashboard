@@ -13,6 +13,7 @@ const Login = () => {
             const response = await fetch('https://api.interpol.sd-lab.nl/api/create-session', {
                 method: 'POST',
                 body: formData,
+                credentials: 'include' // Ensure cookies are included with the request
             });
 
             // Check if the response is OK (status in the range 200-299)
@@ -26,6 +27,10 @@ const Login = () => {
             if (login.message === 'Docent ingelogd' && login.session) {
                 sessionStorage.setItem('dashboard', JSON.stringify(login.session));
             } else if(login.message === 'Student ingelogd' && login.session) {
+                // ============================================================
+                // TODO: Check functionality with mock student on LDAP
+                // ============================================================
+
                 // Get the group info and store into session storage
                 const student = await fetch('https://api.interpol.sd-lab.nl/api/student-and-group',  + new URLSearchParams({ id: login.session.ingelogdAls }).toString());
                 
@@ -35,7 +40,7 @@ const Login = () => {
                 }
                 
                 const studentData = await response.json();
-                console.log(studentData);
+
                 if (studentData.message === 'Student en groep opgehaald') {
                     login.session.studentData = studentData.studentData;
                 }
