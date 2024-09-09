@@ -25,9 +25,9 @@ const Login = () => {
 
             // Check if the login was successful
             if (login.message === 'Docent ingelogd' && login.session) {
-                sessionStorage.setItem('dashboard', { ...login.session });
+                sessionStorage.setItem('dashboard', login.session);
             } else if(login.message === 'Student ingelogd' && login.session) {
-                sessionStorage.setItem('dashboard', { ...login.session });
+                sessionStorage.setItem('dashboard', login.session);
             } else {
                 console.error('Er ging iets fout met inloggen:', login.message);
                 sessionStorage.clear();
