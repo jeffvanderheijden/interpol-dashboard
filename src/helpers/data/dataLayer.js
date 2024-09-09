@@ -22,7 +22,6 @@ export const login = async (formData) => {
         } else {
             console.log('Login successful:', loginResponse.message);
         }
-
     } catch (error) {
         console.error('Error creating session:', error);
     }
@@ -54,7 +53,6 @@ export const checkSession = async (type) => {
         } else {
             return false;
         }
-
     } catch (error) {
         console.error('Error checking session:', error);
         return false;

@@ -25,7 +25,7 @@ const DashboardPage = () => {
         });
         checkSession("DOCENT").then(hasSession => {
             // if teacher, go to admin panel
-            !hasSession && navigate('/login');
+            hasSession && window.location.replace("https://admin.interpol.sd-lab.nl");
         });
     }, []);
 

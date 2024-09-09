@@ -22,7 +22,7 @@ const Login = () => {
         });
         checkSession("DOCENT").then(hasSession => {
             // if teacher, go to admin panel
-            hasSession && navigate('/docent-dashboard');
+            hasSession && window.location.replace("https://admin.interpol.sd-lab.nl");
         });
     }, []);
 
