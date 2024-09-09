@@ -20,7 +20,7 @@ const CreateTeam = ({
     const takePhotoRef = useRef(null);
     const finalImageRef = useRef(null);
 
-    const api = "https://api.jeffvanderheijden.nl/api";
+    const api = "https://dashboard.interpol.sd-lab.nl/api";
 
     const getVideoStream = async () => {
         try {
@@ -35,7 +35,7 @@ const CreateTeam = ({
                 return;
             }
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
 
         if (videoRef && videoRef.current) {

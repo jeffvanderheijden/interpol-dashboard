@@ -20,5 +20,5 @@ export function useInterval(callback, delay) {
             let id = setInterval(func, delay); 
             return () => clearInterval(id); 
         } 
-    }, [delay]); 
+    }, [delay]);
 }

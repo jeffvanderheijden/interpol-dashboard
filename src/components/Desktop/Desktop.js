@@ -28,6 +28,8 @@ const Desktop = ({
         end: (item, monitor) => {
             if(!monitor.didDrop()) {
                 console.log('Did not drop');
+                // target return values to initial position
+                // is item needed?
             }
         }
     }));
