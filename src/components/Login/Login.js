@@ -26,7 +26,7 @@ const Login = () => {
             // Check if the login was successful
             if (login.message === 'Docent ingelogd') {
                 console.log('Docent is succesvol ingelogd!');
-                console.log(login.session);
+                console.log('Sessie:', login.session);
             } else if(login.message === 'Student ingelogd') {
                 console.log('Student is succesvol ingelogd!');
             } else {
