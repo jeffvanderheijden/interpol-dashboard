@@ -21,17 +21,15 @@ const Login = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            // Parse the response as JSON
             const login = await response.json();
-            console.log('Login response:', login);
 
-            // Handle the login response (e.g., save session data, navigate to another page)
-            // Example: check if login was successful based on the response
-            if (login.success) {
-                console.log('Login successful!');
-                // You could redirect or perform other actions here
+            // Check if the login was successful
+            if (login.message === 'Docent ingelogd') {
+                console.log('Docent is succesvol ingelogd!');
+            } else if(login.message === 'Student ingelogd') {
+                console.log('Student is succesvol ingelogd!');
             } else {
-                console.error('Login failed:', login.message);
+                console.error('Er ging iets fout met inloggen:', login.message);
             }
         } catch (error) {
             console.error('Error creating team:', error);
