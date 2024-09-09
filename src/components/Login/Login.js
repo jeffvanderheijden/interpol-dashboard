@@ -10,7 +10,6 @@ const Login = () => {
         formData.append('password', e.target.elements.password.value);
         
         try {
-            // Make the POST request to the API
             const response = await fetch('https://api.interpol.sd-lab.nl/api/create-session', {
                 method: 'POST',
                 body: formData,
@@ -27,6 +26,20 @@ const Login = () => {
             if (login.message === 'Docent ingelogd' && login.session) {
                 sessionStorage.setItem('dashboard', JSON.stringify(login.session));
             } else if(login.message === 'Student ingelogd' && login.session) {
+                // Get the group info and store into session storage
+                const student = await fetch('https://api.interpol.sd-lab.nl/api/student-and-group',  + new URLSearchParams({ id: login.session.ingelogdAls }).toString());
+                
+                // Check if the response is OK (status in the range 200-299)
+                if (!student.ok) {
+                    throw new Error(`HTTP error! Status: ${student.status}`);
+                }
+                
+                const studentData = await response.json();
+                
+                if (studentData.message === 'Student en groep opgehaald') {
+                    login.session.studentData = studentData.studentData;
+                }
+
                 sessionStorage.setItem('dashboard', JSON.stringify(login.session));
             } else {
                 console.error('Er ging iets fout met inloggen:', login.message);
