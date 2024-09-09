@@ -24,10 +24,10 @@ const Login = () => {
             const login = await response.json();
 
             // Check if the login was successful
-            if (login.message === 'Docent ingelogd') {
+            if (login.message === 'Docent ingelogd' && login.session) {
                 console.log('Docent is succesvol ingelogd!');
                 console.log('Sessie:', login.session);
-            } else if(login.message === 'Student ingelogd') {
+            } else if(login.message === 'Student ingelogd' && login.session) {
                 console.log('Student is succesvol ingelogd!');
             } else {
                 console.error('Er ging iets fout met inloggen:', login.message);
