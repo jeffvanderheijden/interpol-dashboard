@@ -1,0 +1,44 @@
+#loginWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#loginWrapper form {
+    width: 360px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+}
+
+#loginWrapper form input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+}
+
+#loginWrapper form button {
+    margin: 0 auto;
+    margin-top: 14px;
+}
+
+#loginWrapper form #desktopLogo {
+    position: relative;
+    left: auto;
+    top: auto;
+    opacity: 1;
+    max-width: 200px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    transform: none;
+}
+
+#loginWrapper form #desktopLogo path {
+    fill: #333;
+}

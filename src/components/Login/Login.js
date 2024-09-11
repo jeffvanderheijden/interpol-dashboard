@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { navigate } from "@reach/router";
 import { checkSession, login } from "./../../helpers/data/dataLayer";
+import InterpolLogo from "./../../assets/icons/InterpolLogo";
 import "./Login.css";
 
 const Login = () => {
@@ -10,7 +11,7 @@ const Login = () => {
         const formData = new FormData();
         formData.append('username', e.target.elements.username.value);
         formData.append('password', e.target.elements.password.value);
-
+        
         login(formData);
     }
 
@@ -27,10 +28,11 @@ const Login = () => {
     }, []);
 
     return (
-        <div id="loginWrapper">
+        <div id="loginWrapper">            
             <form id="loginForm" onSubmit={(e) => { submitForm(e) }}>
-                <input type="text" id="username" placeholder="Username" />
-                <input type="password" id="password" placeholder="Password" />
+                <InterpolLogo />
+                <input type="text" id="username" placeholder="Studentennummer" />
+                <input type="password" id="password" placeholder="Wachtwoord" />
                 <button type="submit" className="btn"><span>Inloggen</span></button>
             </form>
         </div>
