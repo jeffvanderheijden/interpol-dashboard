@@ -24,6 +24,7 @@ const DashboardPage = () => {
             !hasSession && navigate('/login');
             // If logged in as student, get data
             hasSession && getStudentData().then(data => {
+                console.log(data);
                 setStudent({
                     name: data.name[0],
                     class: data.description[0],

@@ -102,7 +102,7 @@ export const logout = async () => {
         }
 
         const data = await response.json();
-        console.log('Logout successful:', data.message);
+        console.log('Logout successful:', data);
 
         // Redirect to login page or perform other actions
         navigate('/login');
