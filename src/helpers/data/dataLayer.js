@@ -79,7 +79,7 @@ export const getStudentData = async () => {
             return false;
         }
 
-        console.log('Student data:', userData.json());
+       return userData.json();
        
     } catch (error) {
         console.error('Error checking student data:', error);
