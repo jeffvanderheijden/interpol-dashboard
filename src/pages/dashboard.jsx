@@ -15,11 +15,12 @@ const DashboardPage = () => {
         { name: "SateliteView", open: false, invisible: false, selected: false, left: 100, top: 100 }
     ]);
 
-    // Check if user is logged in as student or teacher
+    // Check if user is logged in as student or teacher 
     useEffect(() => {
         checkSession("STUDENT").then(hasSession => {
-            // if student, go to dashboard
+            // if not logged in, go to login page
             !hasSession && navigate('/login');
+            // If logged in as student, get data
             hasSession && getStudentData();
         });
         checkSession("DOCENT").then(hasSession => {

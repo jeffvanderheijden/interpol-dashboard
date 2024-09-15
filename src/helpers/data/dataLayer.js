@@ -62,6 +62,7 @@ export const checkSession = async (type) => {
 }
 
 export const getStudentData = async () => {
+    console.log('test');
     try {
         const response = await fetch(`${api}/student-data`, {
             method: 'GET',
