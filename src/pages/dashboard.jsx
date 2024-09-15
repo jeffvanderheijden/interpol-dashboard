@@ -5,15 +5,13 @@ import Window from "../components/Window/Window"
 import { checkSession } from "./../helpers/data/dataLayer";
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
-import Login from "../components/Login/Login";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import TutorialFinal from "../components/Tutorial/TutorialFinal";
 
 const DashboardPage = () => {
     const [windows, setWindows] = useState([
-        { name: "CreateTeam", open: false, invisible: false, selected: false, left: 20, top: 20 },
-        { name: "Login", open: false, invisible: false, selected: false, left: 60, top: 60 },
+        { name: "CreateTeam", open: false, invisible: false, selected: false, left: 20, top: 20 },     
         { name: "SateliteView", open: false, invisible: false, selected: false, left: 100, top: 100 }
     ]);
 
@@ -22,6 +20,7 @@ const DashboardPage = () => {
         checkSession("STUDENT").then(hasSession => {
             // if student, go to dashboard
             !hasSession && navigate('/login');
+            hasSession && console.log(hasSession)
         });
         checkSession("DOCENT").then(hasSession => {
             // if teacher, go to admin panel
@@ -51,9 +50,6 @@ const DashboardPage = () => {
                                     windows={windows}
                                     setWindows={setWindows}
                                 />
-                            )}
-                            {window.name === "Login" && (
-                                <Login />
                             )}
                             </Window>
                         )}
