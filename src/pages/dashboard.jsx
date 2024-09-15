@@ -26,9 +26,9 @@ const DashboardPage = () => {
             hasSession && getStudentData().then(data => {
                 console.log(data);
                 setStudent({
-                    name: data.name[0],
-                    class: data.description[0],
-                    studentNumber: data.samaccountname[0]
+                    name: data[0].name[0],
+                    class: data[0].description[0],
+                    studentNumber: data[0].samaccountname[0]
                 })
             });
         });
