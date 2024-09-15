@@ -17,10 +17,12 @@ export const login = async (formData) => {
         const loginResponse = JSON.parse(responseText); // Parse the response text as JSON
 
         // Do something with the login response, e.g., handle login success or error
-        if (loginResponse.error) {
+        if (loginResponse && loginResponse.error) {
             console.error('Login error:', loginResponse.error);
+            return loginResponse.error;
         } else {
             console.log('Login successful:', loginResponse.message);
+            return true;
         }
     } catch (error) {
         console.error('Error creating session:', error);

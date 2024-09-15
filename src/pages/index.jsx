@@ -37,6 +37,18 @@ const IndexPage = () => {
     { name: "SateliteView", open: false, invisible: true, selected: false, left: 180, top: 180 }
   ]);
 
+  // Check if user is logged in as student or teacher
+  useEffect(() => {
+    checkSession("STUDENT").then(hasSession => {
+        // if student, go to dashboard
+        hasSession && navigate('/dashboard');
+    });
+    checkSession("DOCENT").then(hasSession => {
+        // if teacher, go to admin panel
+        hasSession && window.location.replace("https://admin.interpol.sd-lab.nl");
+    });
+  }, []);
+
   useEffect(() => {
     dispatch(setFileStateContent(editorState));
   }, [editorState, dispatch]);
