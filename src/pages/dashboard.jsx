@@ -22,7 +22,7 @@ const DashboardPage = () => {
             !hasSession && navigate('/login');
             // If logged in as student, get data
             hasSession && getStudentData().then(data => {
-                console.log(studentData.name[0]);
+                console.log(data.name[0]);
             });
         });
         checkSession("DOCENT").then(hasSession => {
