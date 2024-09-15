@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { navigate } from "@reach/router";
 import { useDispatch, useSelector } from 'react-redux';
 import { illegalActivitySelector } from '../state/illegalActivity';
 import { fileVisibleContent, setFileStateContent, fileVisibleSelector } from '../state/fileState';
+import { checkSession } from "./../helpers/data/dataLayer";
 import NoSSR from '../components/NoSSR/NoSSR';
 import Window from "../components/Window/Window";
 import ServerList from "../components/ServerList/ServerList";
