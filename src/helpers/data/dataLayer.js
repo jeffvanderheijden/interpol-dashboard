@@ -1,3 +1,4 @@
+import { navigate } from "@reach/router";
 const api = "https://api.interpol.sd-lab.nl/api";
 
 export const login = async (formData) => {
