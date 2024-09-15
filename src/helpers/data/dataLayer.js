@@ -62,7 +62,6 @@ export const checkSession = async (type) => {
 }
 
 export const getStudentData = async () => {
-    console.log('test');
     try {
         const response = await fetch(`${api}/student-data`, {
             method: 'GET',
@@ -79,7 +78,11 @@ export const getStudentData = async () => {
             return false;
         }
 
-       return userData.json();
+        if (userData) {
+            console.log('Student data:', userData);
+            return userData;
+        }
+
        
     } catch (error) {
         console.error('Error checking student data:', error);
