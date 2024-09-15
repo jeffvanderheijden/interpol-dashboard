@@ -21,8 +21,9 @@ const DashboardPage = () => {
             // if not logged in, go to login page
             !hasSession && navigate('/login');
             // If logged in as student, get data
-            const studentData = hasSession && getStudentData();
-            console.log(studentData)
+            hasSession && getStudentData().then(data => {
+                console.log(studentData.name[0]);
+            });
         });
         checkSession("DOCENT").then(hasSession => {
             // if teacher, go to admin panel
