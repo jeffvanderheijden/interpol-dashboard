@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { navigate } from "@reach/router";
 import NoSSR from '../components/NoSSR/NoSSR';
 import Window from "../components/Window/Window"
-import { checkSession, getStudentData } from "./../helpers/data/dataLayer";
+import { checkSession, getStudentData, logout } from "./../helpers/data/dataLayer";
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
 import Layout from "../components/Layout";
@@ -15,6 +15,8 @@ const DashboardPage = () => {
         { name: "SateliteView", open: false, invisible: false, selected: false, left: 100, top: 100 }
     ]);
 
+    const [student, setStudent] = useState({});
+
     // Check if user is logged in as student or teacher 
     useEffect(() => {
         checkSession("STUDENT").then(hasSession => {
@@ -22,9 +24,11 @@ const DashboardPage = () => {
             !hasSession && navigate('/login');
             // If logged in as student, get data
             hasSession && getStudentData().then(data => {
-                console.log(data.name[0]);
-                console.log(data.description[0]);
-                console.log(data.samaccountname[0]);
+                setStudent({
+                    name: data.name[0],
+                    class: data.description[0],
+                    studentNumber: data.samaccountname[0]
+                })
             });
         });
         checkSession("DOCENT").then(hasSession => {
@@ -59,7 +63,14 @@ const DashboardPage = () => {
                             </Window>
                         )}
                     </div>
-                ))}    
+                ))}
+                {student && (
+                    <>
+                        <div>Welkom agent: {student.name} - {student.studentNumber}</div>
+                        <div>{student.class}</div>
+                        <button onClick={() => { logout() }}>Log out</button>
+                    </>
+                )}
                 <SEO title="Dashboard" />
                 <TutorialFinal />
             </Layout>

@@ -79,13 +79,35 @@ export const getStudentData = async () => {
         }
 
         if (userData) {
-            console.log('Student data:', userData);
             return userData;
+        } else {
+            return false;
         }
-
-       
     } catch (error) {
         console.error('Error checking student data:', error);
         return false;
+    }
+}
+
+export const logout = async () => {
+    try {
+        const response = await fetch('https://api.interpol.sd-lab.nl/api/logout.php', {
+            method: 'POST',
+            credentials: 'include' // Include cookies in the request
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Logout successful:', data.message);
+
+        // Redirect to login page or perform other actions
+        navigate('/login');
+
+    } catch (error) {
+        console.error('Error logging out:', error);
+        // Handle error, e.g., display error message
     }
 }
