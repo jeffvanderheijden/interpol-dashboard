@@ -60,3 +60,28 @@ export const checkSession = async (type) => {
         return false;
     }
 }
+
+export const getStudentData = async () => {
+    try {
+        const response = await fetch(`${api}/student-data`, {
+            method: 'GET',
+            credentials: 'include' // Include cookies in the request
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const userData = await response.json();
+
+        if (userData && userData.error) {
+            console.error('Error student data:', userData.error);
+            return false;
+        }
+
+        console.log('Student data:', userData);
+       
+    } catch (error) {
+        console.error('Error checking student data:', error);
+        return false;
+    }
+}

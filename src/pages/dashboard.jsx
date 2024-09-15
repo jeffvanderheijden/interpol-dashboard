@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { navigate } from "@reach/router";
 import NoSSR from '../components/NoSSR/NoSSR';
 import Window from "../components/Window/Window"
-import { checkSession } from "./../helpers/data/dataLayer";
+import { checkSession, getStudentData } from "./../helpers/data/dataLayer";
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
 import Layout from "../components/Layout";
@@ -20,7 +20,7 @@ const DashboardPage = () => {
         checkSession("STUDENT").then(hasSession => {
             // if student, go to dashboard
             !hasSession && navigate('/login');
-            hasSession && console.log(hasSession)
+            hasSession && getStudentData();
         });
         checkSession("DOCENT").then(hasSession => {
             // if teacher, go to admin panel
