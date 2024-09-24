@@ -8,6 +8,7 @@ import CreateTeam from "../components/Team/CreateTeam";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import TutorialFinal from "../components/Tutorial/TutorialFinal";
+import StudentInfo from '../components/Student/StudentInfo';
 
 const DashboardPage = () => {
     const [windows, setWindows] = useState([
@@ -66,11 +67,10 @@ const DashboardPage = () => {
                     </div>
                 ))}
                 {student && (
-                    <>
-                        <div>Welkom agent: {student.name} - {student.studentNumber}</div>
-                        <div>{student.class}</div>
-                        <button onClick={() => { logout() }}>Log out</button>
-                    </>
+                    <StudentInfo 
+                        student={student}
+                        logout={logout}
+                    />
                 )}
                 <SEO title="Dashboard" />
                 <TutorialFinal />
