@@ -39,6 +39,13 @@ const DashboardPage = () => {
         });
     }, []);
 
+    useEffect(() => {
+        if(student && student.studentNumber) {
+            console.log("Student data loaded:", student);
+            
+        }
+    }, [student]);
+
     return (
         <NoSSR>
             <Layout
