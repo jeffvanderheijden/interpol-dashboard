@@ -112,3 +112,32 @@ export const logout = async () => {
         // Handle error, e.g., display error message
     }
 }
+
+// TODO::::: Implement the following functions :::======
+export const getTeamData = async () => {
+    try {
+        const response = await fetch(`${api}/team-data`, {
+            method: 'GET',
+            credentials: 'include' // Include cookies in the request
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const teamData = await response.json();
+
+        if (teamData && teamData.error) {
+            console.error('Error getting team data:', teamData.error);
+            return false;
+        }
+
+        if (teamData) {
+            return teamData;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Error getting team data:', error);
+    }
+}
