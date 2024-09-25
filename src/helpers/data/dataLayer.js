@@ -90,6 +90,34 @@ export const getStudentData = async () => {
     }
 }
 
+export const getAdditionalStudentData = async (studentId) => {
+    try {
+        const response = await fetch(`${api}/student-additional-data?id=${studentId}`, {
+            method: 'GET',
+            credentials: 'include' // Include cookies in the request
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const userData = await response.json();
+
+        if (userData && userData.error) {
+            console.error('Error student data:', userData.error);
+            return false;
+        }
+
+        if (userData) {
+            return userData;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Error checking student data:', error);
+        return false;
+    }
+}
+
 export const logout = async () => {
     try {
         const response = await fetch('https://api.interpol.sd-lab.nl/api/logout.php', {
@@ -116,7 +144,7 @@ export const logout = async () => {
 // TODO::::: Implement the following functions :::======
 export const getTeamData = async () => {
     try {
-        const response = await fetch(`${api}/team-data`, {
+        const response = await fetch(`${api}/team-data?id=${groupId}`, {
             method: 'GET',
             credentials: 'include' // Include cookies in the request
         });

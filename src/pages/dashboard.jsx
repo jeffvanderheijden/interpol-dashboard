@@ -25,12 +25,23 @@ const DashboardPage = () => {
             !hasSession && navigate('/login');
             // If logged in as student, get data
             hasSession && getStudentData().then(data => {
-                console.log(data);
-                setStudent({
-                    name: data[0].name[0],
-                    class: data[0].description[0],
-                    studentNumber: data[0].samaccountname[0]
-                })
+                if (!data) {
+                    console.error("Error getting student data");
+                } else {
+                    // get additional data from our own database based on studentnumber
+                    getAdditionalStudentData(data[0].samaccountname[0]).then(additionalData => {
+                        if (!additionalData) {
+                            console.error("Error getting additional student data");
+                        } else {
+                            console.log(additionalData);
+                            setStudent({
+                                name: data[0].name[0],
+                                class: data[0].description[0],
+                                studentNumber: data[0].samaccountname[0]
+                            });
+                        }
+                    });                    
+                }
             });
         });
         checkSession("DOCENT").then(hasSession => {
@@ -42,7 +53,7 @@ const DashboardPage = () => {
     useEffect(() => {
         if(student && student.studentNumber) {
             console.log("Student data loaded:", student);
-            
+
         }
     }, [student]);
 
