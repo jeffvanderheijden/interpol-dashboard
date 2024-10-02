@@ -11,11 +11,7 @@ import TutorialFinal from "../components/Tutorial/TutorialFinal";
 import StudentInfo from '../components/Student/StudentInfo';
 
 const DashboardPage = () => {
-    const [windows, setWindows] = useState([
-        { name: "CreateTeam", open: false, invisible: false, selected: false, left: 20, top: 20 },     
-        { name: "SateliteView", open: false, invisible: false, selected: false, left: 100, top: 100 }
-    ]);
-
+    const [windows, setWindows] = useState([]);
     const [student, setStudent] = useState({});
 
     // Check if user is logged in as student or teacher 
@@ -31,18 +27,24 @@ const DashboardPage = () => {
                     // get additional data from our own database based on studentnumber
                     getAdditionalStudentData(data[0].samaccountname[0]).then(additionalData => {
                         if (!additionalData) {
-                            console.log('No additional data, student does not exist in interpol database.');
+                            console.warn('No additional data, student does not exist in interpol database.');
                             setStudent({
                                 name: data[0].name[0],
                                 class: data[0].description[0],
                                 studentNumber: data[0].samaccountname[0]
                             });
+                            setWindows([
+                                { name: "CreateTeam", open: false, invisible: false, selected: false, left: 20, top: 20 }  
+                            ]);
                         } else {
                             setStudent({
                                 name: data[0].name[0],
                                 class: data[0].description[0],
                                 studentNumber: data[0].samaccountname[0]
                             });
+                            setWindows([
+                                { name: "SateliteView", open: false, invisible: false, selected: false, left: 20, top: 20 }
+                            ]);
                         }
                     });                    
                 }
@@ -53,13 +55,6 @@ const DashboardPage = () => {
             hasSession && window.location.replace("https://admin.interpol.sd-lab.nl");
         });
     }, []);
-
-    useEffect(() => {
-        if(student && student.studentNumber) {
-            console.log("Student data loaded:", student);
-
-        }
-    }, [student]);
 
     return (
         <NoSSR>
