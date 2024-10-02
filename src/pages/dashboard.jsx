@@ -31,11 +31,13 @@ const DashboardPage = () => {
                     // get additional data from our own database based on studentnumber
                     getAdditionalStudentData(data[0].samaccountname[0]).then(additionalData => {
                         if (!additionalData) {
-                            console.log('test', data[0].samaccountname[0]);
-                            console.log('test ad data', additionalData);
-                            console.error("Error getting additional student data");
+                            console.log('No additional data, student does not exist in interpol database.');
+                            setStudent({
+                                name: data[0].name[0],
+                                class: data[0].description[0],
+                                studentNumber: data[0].samaccountname[0]
+                            });
                         } else {
-                            console.log(additionalData);
                             setStudent({
                                 name: data[0].name[0],
                                 class: data[0].description[0],
