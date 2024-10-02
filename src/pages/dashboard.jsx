@@ -35,12 +35,14 @@ const DashboardPage = () => {
                             });
                             setWindows([
                                 { name: "CreateTeam", open: false, invisible: false, selected: false, left: 20, top: 20 }  
+                                // + 100px per new window
                             ]);
                         } else {
                             setStudent({
                                 name: data[0].name[0],
                                 class: data[0].description[0],
                                 studentNumber: data[0].samaccountname[0]
+                                // Todo: add additional data here
                             });
                             setWindows([
                                 { name: "SateliteView", open: false, invisible: false, selected: false, left: 20, top: 20 }
@@ -77,6 +79,7 @@ const DashboardPage = () => {
                                 <CreateTeam 
                                     windows={windows}
                                     setWindows={setWindows}
+                                    studentData={student}
                                 />
                             )}
                             </Window>

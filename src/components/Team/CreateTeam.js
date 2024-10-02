@@ -5,7 +5,8 @@ import "./CreateTeam.css";
 
 const CreateTeam = ({
     windows,
-    setWindows
+    setWindows,
+    studentData
 }) => {
     const [camera, setCamera] = useState(false);
     const [streaming, setStreaming] = useState(false);
@@ -195,13 +196,13 @@ const CreateTeam = ({
             <form onSubmit={(e) => { createTeam(e) }}>
                 <input type="hidden" id="image" name="image" value={image} required />
                 <input type="text" id="teamName" name="teamName" placeholder="Team naam" required />
-                <input type="text" id="klas" name="klas" placeholder="Klas" required />
+                <input type="text" id="klas" name="klas" placeholder="Klas" value={studentData.class} required />
                 <div>
                     <label>
                         <span>Student 1</span>
-                        <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" required />
+                        <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" value={studentData.name} required />
                     </label>
-                    <input className="half" id="student1_number" name="student1_number" type="number" pattern="\d*" minLength="6" maxLength="6" placeholder="Student nummer" required />
+                    <input className="half" id="student1_number" name="student1_number" type="number" pattern="\d*" value={studentData.studentNumber} minLength="6" maxLength="6" placeholder="Student nummer" required />
                 </div>
                 <div>
                     <label>
