@@ -31,8 +31,8 @@ const DashboardPage = () => {
                     // get additional data from our own database based on studentnumber
                     getAdditionalStudentData(data[0].samaccountname[0]).then(additionalData => {
                         if (!additionalData) {
-                            console.log(data[0].samaccountname[0]);
-                            console.log(additionalData);
+                            console.log('test', data[0].samaccountname[0]);
+                            console.log('test ad data', additionalData);
                             console.error("Error getting additional student data");
                         } else {
                             console.log(additionalData);
