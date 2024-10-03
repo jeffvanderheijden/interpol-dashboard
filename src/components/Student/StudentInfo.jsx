@@ -1,5 +1,6 @@
 import React from "react";
 import "./StudentInfo.css";
+import { api } from "./../../helpers/data/dataLayer"
 
 const StudentInfo = ({
     student,
@@ -13,7 +14,7 @@ const StudentInfo = ({
             {student.team && (
                 <div>
                     <h2>Team: {student.team}</h2>
-                    <img src={student.teamImage} alt="Team" />
+                    <img src={`${api}/${student.teamImage}`} alt="Team" />
                 </div>
             )}
         </div>
