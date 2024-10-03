@@ -92,7 +92,7 @@ export const getStudentData = async () => {
 
 export const getAdditionalStudentData = async (studentId) => {
     try {
-        const response = await fetch(`${api}/student-additional-data?id=${studentId}`, {
+        const response = await fetch(`${api}/student-additional-data?student_id=${studentId}`, {
             method: 'GET',
             credentials: 'include' // Include cookies in the request
         });
