@@ -41,9 +41,10 @@ const DashboardPage = () => {
                             setStudent({
                                 name: data[0].name[0],
                                 class: data[0].description[0],
-                                studentNumber: data[0].samaccountname[0]
+                                studentNumber: data[0].samaccountname[0],
                                 // Todo: add additional data here
                             });
+                            console.log(additionalData);
                             setWindows([
                                 { name: "SateliteView", open: false, invisible: false, selected: false, left: 20, top: 20 }
                             ]);
