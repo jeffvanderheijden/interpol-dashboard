@@ -92,7 +92,7 @@ const CreateTeam = ({
         e.preventDefault();
     }
 
-    const createTeam = async (e) => {
+    const createTeamInComp = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('image', image);
@@ -162,7 +162,7 @@ const CreateTeam = ({
             <div className="teamImage" onClick={() => { setCamera(true) }} onKeyDown={() => { setCamera(true) }}>
                 <img src={TakePhoto} ref={finalImageRef} alt="Team" />
             </div>
-            <form onSubmit={(e) => { createTeam(e) }}>
+            <form onSubmit={(e) => { createTeamInComp(e) }}>
                 <input type="hidden" id="image" name="image" value={image} required />
                 <input type="text" id="teamName" name="teamName" placeholder="Team naam" required />
                 <input type="text" id="klas" name="klas" placeholder="Klas" value={studentData.class} disabled required />
