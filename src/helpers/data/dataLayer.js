@@ -3,7 +3,7 @@ const api = "https://api.interpol.sd-lab.nl/api";
 
 export const login = async (formData) => {
     try {
-        const response = await fetch('https://api.interpol.sd-lab.nl/api/create-session', {
+        const response = await fetch(`${api}/create-session`, {
             method: 'POST',
             body: formData,
             credentials: 'include' // Ensure cookies are included with the request
@@ -120,7 +120,7 @@ export const getAdditionalStudentData = async (studentId) => {
 
 export const logout = async () => {
     try {
-        const response = await fetch('https://api.interpol.sd-lab.nl/api/logout.php', {
+        const response = await fetch(`${api}/logout.php`, {
             method: 'POST',
             credentials: 'include' // Include cookies in the request
         });
