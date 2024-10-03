@@ -141,6 +141,46 @@ export const logout = async () => {
     }
 }
 
+export const createTeam = async (formData, setTeamSuccessfullyCreated) => {
+    try {
+        const response = await fetch(`${api}/create-team`, {
+            method: 'POST',
+            body: formData,
+        });
+        const newTeam = await response.text();
+        console.log(JSON.parse(newTeam).message);
+        if (JSON.parse(newTeam).message) {
+            setTeamSuccessfullyCreated(true);
+            // Set initial points for the team on completion
+            // ======================================
+            // TODO: Set points based on min points and time spend on the challenge
+            // ======================================
+            const setPoints = async () => {
+                const formData = new FormData();
+                formData.append('group_id', JSON.parse(newTeam).message);
+                formData.append('challenge_id', 4);
+                formData.append('completed', 1);
+                formData.append('points', Math.floor(Math.random() * 200) + 100);
+                try {
+                    const response = await fetch(`${api}/set-challenge-points`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const success = await response.text()
+                    console.log(success);
+                } catch (error) {
+                    console.error('Error setting points:', error);
+                }
+            
+            }
+            setPoints();
+        }
+    } catch (error) {
+        console.error('Error creating team:', error);
+    }
+}
+
+
 // TODO::::: Implement the following functions :::======
 export const getTeamData = async () => {
     try {

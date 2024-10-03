@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import TakePhoto from "./../../assets/images/take-photo.png";
 import SuccessScreen from "./../SuccessScreen/SuccessScreen";
+import { createTeam } from "./../../helpers/data/dataLayer";
 import "./CreateTeam.css";
 
 const CreateTeam = ({
@@ -21,7 +22,7 @@ const CreateTeam = ({
     const takePhotoRef = useRef(null);
     const finalImageRef = useRef(null);
 
-    const api = "https://dashboard.interpol.sd-lab.nl/api";
+    const api = "https://api.interpol.sd-lab.nl/api";
 
     const getVideoStream = async () => {
         try {
@@ -117,42 +118,10 @@ const CreateTeam = ({
         ];
         formData.append('students', JSON.stringify(students));
         
-        try {
-            const response = await fetch(`${api}/create-team`, {
-                method: 'POST',
-                body: formData,
-            });
-            const newTeam = await response.text();
-            console.log(JSON.parse(newTeam).message);
-            if (JSON.parse(newTeam).message) {
-                setTeamSuccessfullyCreated(true);
-                // Set initial points for the team on completion
-                // ======================================
-                // TODO: Set points based on min points and time spend on the challenge
-                // ======================================
-                const setPoints = async () => {
-                    const formData = new FormData();
-                    formData.append('group_id', JSON.parse(newTeam).message);
-                    formData.append('challenge_id', 4);
-                    formData.append('completed', 1);
-                    formData.append('points', Math.floor(Math.random() * 200) + 100);
-                    try {
-                        const response = await fetch(`${api}/set-challenge-points`, {
-                            method: 'POST',
-                            body: formData
-                        });
-                        const success = await response.text()
-                        console.log(success);
-                    } catch (error) {
-                        console.error('Error setting points:', error);
-                    }
-                
-                }
-                setPoints();
-            }
-        } catch (error) {
-            console.error('Error creating team:', error);
-        }
+        // do fetch request
+        createTeam(formData, setTeamSuccessfullyCreated).then(newTeam => {
+            console.log(newTeam);
+        });
     };
 
     useEffect(() => {
@@ -196,13 +165,13 @@ const CreateTeam = ({
             <form onSubmit={(e) => { createTeam(e) }}>
                 <input type="hidden" id="image" name="image" value={image} required />
                 <input type="text" id="teamName" name="teamName" placeholder="Team naam" required />
-                <input type="text" id="klas" name="klas" placeholder="Klas" value={studentData.class} required />
+                <input type="text" id="klas" name="klas" placeholder="Klas" value={studentData.class} disabled required />
                 <div>
                     <label>
                         <span>Student 1</span>
-                        <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" value={studentData.name} required />
+                        <input className="half" type="text" id="student1" name="student1" placeholder="Student voornaam" value={studentData.name} disabled required />
                     </label>
-                    <input className="half" id="student1_number" name="student1_number" type="number" pattern="\d*" value={studentData.studentNumber} minLength="6" maxLength="6" placeholder="Student nummer" required />
+                    <input className="half" id="student1_number" name="student1_number" type="number" pattern="\d*" value={studentData.studentNumber} disabled minLength="6" maxLength="6" placeholder="Student nummer" required />
                 </div>
                 <div>
                     <label>
