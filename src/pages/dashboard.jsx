@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { navigate } from "@reach/router";
 import NoSSR from '../components/NoSSR/NoSSR';
 import Window from "../components/Window/Window";
-import { checkSession, getStudentData, getAdditionalStudentData, logout } from "./../helpers/data/dataLayer";
+import { api, checkSession, getStudentData, getAdditionalStudentData, logout } from "./../helpers/data/dataLayer";
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
 import Layout from "../components/Layout";
@@ -42,7 +42,8 @@ const DashboardPage = () => {
                                 name: data[0].name[0],
                                 class: data[0].description[0],
                                 studentNumber: data[0].samaccountname[0],
-                                // Todo: add additional data here
+                                team: additionalData.name,
+                                teamImage: additionalData.image_url
                             });
                             console.log(additionalData);
                             setWindows([

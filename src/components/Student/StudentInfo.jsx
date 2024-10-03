@@ -10,6 +10,12 @@ const StudentInfo = ({
             <div>Welkom agent: {student.name} - {student.studentNumber}</div>
             <div>{student.class}</div>
             <button onClick={() => { logout() }}>Log out</button>
+            {student.team && (
+                <div>
+                    <h2>Team: {student.team}</h2>
+                    <img src={student.teamImage} alt="Team" />
+                </div>
+            )}
         </div>
     )
 }
