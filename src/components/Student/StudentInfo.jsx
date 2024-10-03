@@ -14,7 +14,7 @@ const StudentInfo = ({
             {student.team && (
                 <div>
                     <h2>Team: {student.team}</h2>
-                    <img src={`${api}/${student.teamImage}`} alt="Team" />
+                    <img src={`https://api.interpol.sd-lab.nl/${student.teamImage}`} alt="Team" />
                 </div>
             )}
         </div>
