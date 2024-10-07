@@ -7,16 +7,20 @@ const StudentInfo = ({
 }) => {
     return (
         <div class="studentInfo">
-            <div>{student.name}</div>
-            <div id="studentNumber">{student.studentNumber}</div>
-            <div id="class">{student && student.class && student.class.substring(0, 3)}</div>      
             {student.team && (
-                <div>
+                <div id="team">
                     <h2>Team: {student.team}</h2>
                     <img src={`https://api.interpol.sd-lab.nl/${student.teamImage}`} alt="Team" />
                 </div>
             )}
-            <button onClick={() => { logout() }}>Log out</button>
+            {student && student.name && (
+                <div id="student">
+                    <div>{student.name}</div>
+                    <div id="studentNumber">{student.studentNumber}</div>
+                    <div id="class">{student.class.substring(0, 3)}</div>      
+                    <button onClick={() => { logout() }}>Log out</button>
+                </div>
+            )}
         </div>
     )
 }
