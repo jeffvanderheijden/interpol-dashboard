@@ -44,10 +44,22 @@
 }
 
 /* hacks because lazy.. :( */
-.studentInfo #studentName:before {
+.studentInfo #studentName:before,
+.studentInfo #studentNumber:before,
+.studentInfo #class:before {
     content: "Naam";
     position: absolute;
     font-size: 10px;
-    background-color:#45434b;
-    top: -5px;
+    padding: 4px;
+    background-color: #45434b;
+    top: -9px;
+    left: 6px;
+    color: rgba(255, 255, 255, .5);
+    border-radius: 3px;
+}
+.studentInfo #studentNumber:before {
+    content: "Studentnummer";
+}   
+.studentInfo #class:before {
+    content: "Klas";
 }
