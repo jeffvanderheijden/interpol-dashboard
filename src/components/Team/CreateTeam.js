@@ -121,6 +121,8 @@ const CreateTeam = ({
         // do fetch request
         createTeam(formData, setTeamSuccessfullyCreated).then(newTeam => {
             console.log(newTeam);
+            // Reload the page to show the new team
+            window.location.reload();
         });
     };
 
