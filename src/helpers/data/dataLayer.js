@@ -10,6 +10,7 @@ export const login = async (formData) => {
         });
 
         const responseText = await response.text(); // Read the raw response body as text
+        console.log(responseText);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
