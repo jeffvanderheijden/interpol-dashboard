@@ -14,7 +14,7 @@
 .studentInfo #class,
 .studentInfo #studentName,
 .studentInfo #studentNumber {
-    margin-bottom: 5px;
+    margin-bottom: 14px;
     padding: 10px;
     position: relative;
     background-color: #45434b;
@@ -23,6 +23,7 @@
 
 .studentInfo #team {
     margin-right: 10px;
+    margin-bottom: 0;
 }
 .studentInfo #team h2 {
     font-size: 18px;
