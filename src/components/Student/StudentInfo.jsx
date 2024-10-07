@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./../Button/Button";
 import "./StudentInfo.css";
 
 const StudentInfo = ({
@@ -17,8 +18,8 @@ const StudentInfo = ({
                 <div id="student">
                     <div id="studentName">{student.name}</div>
                     <div id="studentNumber">{student.studentNumber}</div>
-                    <div id="class">{student.class.substring(0, 3)}</div>      
-                    <button onClick={() => { logout() }}>Log out</button>
+                    <div id="class">{student.class.substring(0, 3)}</div>     
+                    <Button onClick={() => { logout() }}>Log out</Button> 
                 </div>
             )}
         </div>
