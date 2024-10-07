@@ -5,9 +5,15 @@
     left: 20px;
     padding: 10px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.studentInfo > * {
+.studentInfo #team,
+.studentInfo #class,
+.studentInfo #studentName,
+.studentInfo #studentNumber {
     margin-bottom: 5px;
     padding: 10px;
     background-color: #45434b;
