@@ -12,10 +12,7 @@ const Login = () => {
         formData.append('username', e.target.elements.username.value);
         formData.append('password', e.target.elements.password.value);
         
-        const loggedIn = await login(formData);
-        if (loggedIn) {
-            navigate('/dashboard');
-        }
+        login(formData);
     }
 
     // Check if user is logged in as student or teacher
