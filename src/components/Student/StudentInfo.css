@@ -9,6 +9,19 @@
 
 .studentInfo > * {
     margin-bottom: 5px;
+    padding: 10px;
+    background-color: #45434b;
+    border: 1px solid #6a6776;
+}
+
+.studentInfo > #class {
+    margin-right: 2%;
+}
+
+.studentInfo > #class,
+.studentInfo > #studentNumber {
+    width: 49%;
+    float: left;
 }
 
 .studentInfo > *:last-child {

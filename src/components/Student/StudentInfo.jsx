@@ -7,15 +7,16 @@ const StudentInfo = ({
 }) => {
     return (
         <div class="studentInfo">
-            <div>Welkom agent: {student.name} - {student.studentNumber}</div>
-            <div>{student.class}</div>
-            <button onClick={() => { logout() }}>Log out</button>
+            <div>{student.name}</div>
+            <div id="studentNumber">{student.studentNumber}</div>
+            <div id="class">{student.class}</div>      
             {student.team && (
                 <div>
                     <h2>Team: {student.team}</h2>
                     <img src={`https://api.interpol.sd-lab.nl/${student.teamImage}`} alt="Team" />
                 </div>
             )}
+            <button onClick={() => { logout() }}>Log out</button>
         </div>
     )
 }
