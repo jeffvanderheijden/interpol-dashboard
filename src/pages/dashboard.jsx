@@ -45,7 +45,6 @@ const DashboardPage = () => {
                                 team: additionalData.name,
                                 teamImage: additionalData.image_url
                             });
-                            console.log(additionalData);
                             setWindows([
                                 { name: "SateliteView", open: false, invisible: false, selected: false, left: 20, top: 20 }
                             ]);

@@ -16,6 +16,7 @@
 .studentInfo #studentNumber {
     margin-bottom: 5px;
     padding: 10px;
+    position: relative;
     background-color: #45434b;
     border: 1px solid #6a6776;
 }
@@ -24,8 +25,9 @@
     margin-right: 10px;
 }
 .studentInfo #team h2 {
-    font-size: 32px;
+    font-size: 18px;
     font-weight: 500;
+    margin-bottom: 5px;
 }
 .studentInfo > #class {
     margin-right: 2%;
@@ -39,4 +41,13 @@
 
 .studentInfo > *:last-child {
     margin-bottom: 0;
+}
+
+/* hacks because lazy.. :( */
+.studentInfo #studentName:before {
+    content: "Naam";
+    position: absolute;
+    font-size: 10px;
+    background-color:#45434b;
+    top: -5px;
 }
