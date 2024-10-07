@@ -8,7 +8,8 @@ export const login = async (formData) => {
             body: formData,
             credentials: 'include' // Ensure cookies are included with the request
         });
-
+        const test = await response;
+        console.log(test);
         const responseText = await response.text(); // Read the raw response body as text
         console.log(responseText);
 
