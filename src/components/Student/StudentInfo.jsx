@@ -9,7 +9,7 @@ const StudentInfo = ({
         <div class="studentInfo">
             {student.team && (
                 <div id="team">
-                    <h2>Team: {student.team}</h2>
+                    <h2>{student.team}</h2>
                     <img src={`https://api.interpol.sd-lab.nl/${student.teamImage}`} alt="Team" />
                 </div>
             )}

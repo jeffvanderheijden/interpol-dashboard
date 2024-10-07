@@ -20,6 +20,13 @@
     border: 1px solid #6a6776;
 }
 
+.studentInfo #team {
+    margin-right: 10px;
+}
+.studentInfo #team h2 {
+    font-size: 32px;
+    font-weight: 500;
+}
 .studentInfo > #class {
     margin-right: 2%;
 }
