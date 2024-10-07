@@ -9,7 +9,7 @@ const StudentInfo = ({
         <div class="studentInfo">
             <div>{student.name}</div>
             <div id="studentNumber">{student.studentNumber}</div>
-            <div id="class">{student.class}</div>      
+            <div id="class">{student.class.substring(0, 3)}</div>      
             {student.team && (
                 <div>
                     <h2>Team: {student.team}</h2>

@@ -21,7 +21,7 @@
 .studentInfo > #class,
 .studentInfo > #studentNumber {
     width: 49%;
-    float: left;
+    display: inline-block;
 }
 
 .studentInfo > *:last-child {
