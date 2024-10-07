@@ -1,6 +1,5 @@
 import React from "react";
 import "./StudentInfo.css";
-import { api } from "./../../helpers/data/dataLayer"
 
 const StudentInfo = ({
     student,
