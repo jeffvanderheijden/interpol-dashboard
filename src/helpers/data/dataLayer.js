@@ -8,22 +8,16 @@ export const login = async (formData) => {
             body: formData,
             credentials: 'include' // Ensure cookies are included with the request
         });
-        const test = await response;
-        console.log(test);
-        const responseText = await response.text(); // Read the raw response body as text
-        console.log(responseText);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const loginResponse = JSON.parse(responseText); // Parse the response text as JSON
-
-        if (loginResponse && loginResponse.error) {
-            console.error('Login error:', loginResponse.error);
-            return loginResponse.error;
+        if (response && response.error) {
+            console.error('Login error:', response.error);
+            return response.error;
         } else {
-            console.log('Login successful:', loginResponse.message);
+            console.log('Login successful:', response.statusText);
             window.location.reload();
             return true;
         }
