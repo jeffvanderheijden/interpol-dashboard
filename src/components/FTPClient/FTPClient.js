@@ -55,7 +55,7 @@ const FTPClient = () => {
             setUploaded(true);
         }, 3000);
         return () => { clearTimeout(pushToDash) }
-    }, [uploading])
+    }, [uploading]);
 
     return (
         <div id="ftpClient">
