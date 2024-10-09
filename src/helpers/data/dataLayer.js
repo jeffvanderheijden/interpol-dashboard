@@ -206,9 +206,10 @@ export const getTeamData = async () => {
 
 export const getGroupsByClass = async (klas) => {
     try {
+        // Make the initial request to get team data
         const response = await fetch(`${api}/groups-by-class?class=${klas}`, {
             method: 'GET',
-            credentials: 'include' // Include cookies in the request
+            credentials: 'include', // Include cookies in the request
         });
 
         if (!response.ok) {
@@ -216,39 +217,35 @@ export const getGroupsByClass = async (klas) => {
         }
 
         const teamData = await response.json();
-
-        if (teamData && teamData.error) {
-            console.error('Error getting team data:', teamData.error);
+        
+        if (!teamData || teamData.error) {
+            console.error('Error getting team data:', teamData?.error || 'No team data');
             return false;
         }
 
-        if (teamData) {
-            const pointsResponse = await fetch(`${api}/group-points?id=${teamData.id}`, {
-                method: 'GET',
-                credentials: 'include' // Include cookies in the request
-            });
-    
-            if (!pointsResponse.ok) {
-                throw new Error(`HTTP error! status: ${pointsResponse.status}`);
-            }
-    
-            const points = await pointsResponse.json();
-    
-            if (points && points.error) {
-                console.error('Error getting team data:', teamData.error);
-                return false;
-            }
-    
-            if (points) {
-                teamData.points = points.total_points;
-                return teamData;
-            } else {
-                return false;
-            }
-        } else {
+        // Fetch points in parallel
+        const pointsResponse = await fetch(`${api}/group-points?id=${teamData.id}`, {
+            method: 'GET',
+            credentials: 'include', // Include cookies in the request
+        });
+
+        if (!pointsResponse.ok) {
+            throw new Error(`HTTP error! status: ${pointsResponse.status}`);
+        }
+
+        const points = await pointsResponse.json();
+
+        if (!points || points.error) {
+            console.error('Error getting team points:', points?.error || 'No points data');
             return false;
         }
+
+        // Attach points to the teamData object and return
+        teamData.points = points.total_points;
+        return teamData;
+
     } catch (error) {
-        console.error('Error getting team data:', error);
+        console.error('Error fetching team or points data:', error);
+        return false; // Explicitly return false on failure
     }
-}
+};
