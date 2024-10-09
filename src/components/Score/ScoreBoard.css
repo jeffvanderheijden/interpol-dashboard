@@ -7,7 +7,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 1rem 0;
 }
 
 .classSwitch li {
@@ -16,11 +15,17 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     color: #FFF;
+    cursor: pointer;
+}
+.classSwitch li.active {
+    background-color: #8fe507;
 }
 
 #scoreBoard .list {
     padding: 10px;
     border: 1px solid #6a6776;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     background-color: #45434b;
     height: calc(100% - 36px);
 }
