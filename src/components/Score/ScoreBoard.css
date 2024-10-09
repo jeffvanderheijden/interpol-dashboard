@@ -21,11 +21,15 @@
     background-color: #8fe507;
 }
 
-#scoreBoard .list {
-    padding: 10px;
+#scoreBoard .list {    
     border: 1px solid #6a6776;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color: #45434b;
     height: calc(100% - 36px);
+}
+
+#scoreBoard .list > div {
+    padding: 10px;
+    border-bottom: 1px solid #6a6776;
 }
