@@ -240,7 +240,7 @@ export const getGroupsByClass = async (klas) => {
             }
     
             if (points) {
-                teamData.points = points;
+                teamData.points = points.total_points;
                 return teamData;
             } else {
                 return false;
