@@ -7,7 +7,7 @@ const ScoreBoard = () => {
 
     useEffect(() => {
         getGroupsByClass(klas).then(data => {
-            setGroups(data);
+            data.count > 1 ? setGroups(data) : setGroups([data]);
         });
     }, [klas]);
     return (
@@ -20,7 +20,7 @@ const ScoreBoard = () => {
                 <li onClick={() => { setKlas("d1e") }}>D1E</li>
                 <li onClick={() => { setKlas("d1f") }}>D1F</li>
             </ul>
-            {groups.map(group => (
+            {groups && groups.map(group => (
                 <div>{group.name}</div>
             ))}
         </div>
