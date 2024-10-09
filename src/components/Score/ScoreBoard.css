@@ -1,0 +1,16 @@
+#scoreBoard {
+    margin: 10px;
+    background-color: #45434b;
+    border: 1px solid #6a6776;
+}
+
+.classSwitch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 1rem 0;
+}
+
+#scoreBoard .list {
+    padding: 10px;
+}

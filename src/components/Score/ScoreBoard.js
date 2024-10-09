@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./ScoreBoard.css";
 import { getGroupsByClass } from "../../helpers/data/dataLayer";
 
 const ScoreBoard = () => {
@@ -11,8 +12,8 @@ const ScoreBoard = () => {
         });
     }, [klas]);
     return (
-        <div>
-            <ul>
+        <div id="scoreBoard">
+            <ul className={"classSwitch"}>
                 <li onClick={() => { setKlas("d1a") }}>D1A</li>
                 <li onClick={() => { setKlas("d1b") }}>D1B</li>
                 <li onClick={() => { setKlas("d1c") }}>D1C</li>
@@ -20,9 +21,11 @@ const ScoreBoard = () => {
                 <li onClick={() => { setKlas("d1e") }}>D1E</li>
                 <li onClick={() => { setKlas("d1f") }}>D1F</li>
             </ul>
-            {groups && groups.map(group => (
-                <div>{group.name}</div>
-            ))}
+            <div className="list">
+                {groups && groups.map(group => (
+                    <div>{group.name}</div>
+                ))}
+            </div>
         </div>
     )
 }
