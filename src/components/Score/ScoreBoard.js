@@ -19,11 +19,13 @@ const ScoreBoard = () => {
                     <li className={klasje === klas ? "active" : ""} onClick={() => { setKlas(klasje) }}>{klasje.toUpperCase()}</li>
                 ))}
             </ul>
-            <div className="list">
-                {groups && groups.map(group => (
-                    <div>{group.name}</div>
-                ))}
-            </div>
+            {groups && groups.length > 0 && (
+                <div className="list">
+                    {groups.map(group => (
+                        <div>{group.name}</div>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

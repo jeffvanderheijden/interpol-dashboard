@@ -223,7 +223,28 @@ export const getGroupsByClass = async (klas) => {
         }
 
         if (teamData) {
-            return teamData;
+            const pointsResponse = await fetch(`${api}/group-points?id=${teamData.id}`, {
+                method: 'GET',
+                credentials: 'include' // Include cookies in the request
+            });
+    
+            if (!pointsResponse.ok) {
+                throw new Error(`HTTP error! status: ${pointsResponse.status}`);
+            }
+    
+            const points = await pointsResponse.json();
+    
+            if (points && points.error) {
+                console.error('Error getting team data:', teamData.error);
+                return false;
+            }
+    
+            if (points) {
+                teamData.points = points;
+                return teamData;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
