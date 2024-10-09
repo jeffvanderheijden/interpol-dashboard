@@ -1,7 +1,5 @@
 #scoreBoard {
-    margin: 10px;
-    background-color: #45434b;
-    border: 1px solid #6a6776;
+    margin: 10px;    
     height: calc(100% - 50px);
 }
 
@@ -22,4 +20,7 @@
 
 #scoreBoard .list {
     padding: 10px;
+    border: 1px solid #6a6776;
+    background-color: #45434b;
+    height: calc(100% - 36px);
 }
