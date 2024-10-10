@@ -22,7 +22,10 @@ const ScoreBoard = () => {
             {groups && groups.length > 0 && (
                 <div className="list">
                     {groups.map(group => (
-                        <div><span>{group.name}</span> <span>-</span> <span>{group.points}</span></div>
+                        <div>
+                            <span>{group.name}</span>
+                            <span>{group.points}</span>
+                        </div>
                     ))}
                 </div>
             )}

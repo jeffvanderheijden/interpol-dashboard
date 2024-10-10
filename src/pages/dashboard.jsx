@@ -6,6 +6,7 @@ import { checkSession, getStudentData, getAdditionalStudentData, logout } from "
 import Globe from "../components/Globe/GlobeComp";
 import CreateTeam from "../components/Team/CreateTeam";
 import ScoreBoard from "../components/Score/ScoreBoard";
+import Challenges from "../components/Challenges/Challenges";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import TutorialFinal from "../components/Tutorial/TutorialFinal";
@@ -48,7 +49,8 @@ const DashboardPage = () => {
                             });
                             setWindows([
                                 { name: "SateliteView", open: false, invisible: false, selected: false, left: 20, top: 20 },
-                                { name: "ScoreBoard", open: false, invisible: false, selected: false, left: 120, top: 120 }
+                                { name: "ScoreBoard", open: false, invisible: false, selected: false, left: 120, top: 120 },
+                                { name: "Challenges", open: false, invisible: false, selected: false, left: 220, top: 220 }
                             ]);
                         }
                     });                    
@@ -84,6 +86,9 @@ const DashboardPage = () => {
                                     setWindows={setWindows}
                                     studentData={student}
                                 />
+                            )}
+                            {window.name === "Challenges" && (
+                                <Challenges />
                             )}
                             {window.name === "ScoreBoard" && (
                                 <ScoreBoard />
