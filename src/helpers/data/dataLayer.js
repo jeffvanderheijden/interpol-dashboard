@@ -249,3 +249,50 @@ export const getGroupsByClass = async (klas) => {
         return false; // Explicitly return false on failure
     }
 };
+
+export const getGroupChallenges = async (groupId) => {
+    try {
+        // Make the initial request to get team data
+        const response = await fetch(`${api}/challenges-by-group?id=${groupId}`, {
+            method: 'GET',
+            credentials: 'include', // Include cookies in the request
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const challenges = await response.json();
+        console.log(challenges);
+        
+        if (!challenges || challenges.error) {
+            console.error('Error getting challenges data:', challenges?.error || 'No challenges data');
+            return false;
+        }
+
+        // Fetch points in parallel
+        const specificChallenge = await fetch(`${api}/challenge-by-id?id=${challenge.challenge_id}`, {
+            method: 'GET',
+            credentials: 'include', // Include cookies in the request
+        });
+
+        if (!specificChallenge.ok) {
+            throw new Error(`HTTP error! status: ${specificChallenge.status}`);
+        }
+
+        const points = await specificChallenge.json();
+
+        if (!points || points.error) {
+            console.error('Error getting team points:', points?.error || 'No points data');
+            return false;
+        }
+
+        // Attach points to the teamData object and return
+        teamData.points = points.total_points;
+        return teamData;
+
+    } catch (error) {
+        console.error('Error fetching team or points data:', error);
+        return false; // Explicitly return false on failure
+    }
+};
