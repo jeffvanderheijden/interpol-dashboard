@@ -49,7 +49,7 @@ const FTPClient = () => {
         const pushToDash = setTimeout(() => {
             setUploading(false);
             setUploaded(true);
-            navigate("/dashboard/")
+            navigate("/dashboard/");
         }, 3000);
         return () => { clearTimeout(pushToDash) }
     }, [uploading]);

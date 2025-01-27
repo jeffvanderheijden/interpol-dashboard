@@ -18,8 +18,7 @@ export const login = async (formData) => {
             return response.error;
         } else {
             console.log('Login successful:', response.statusText);
-            console.log(response);
-            // window.location.reload();
+            window.location.reload();
             return true;
         }
     } catch (error) {
@@ -164,11 +163,9 @@ export const createTeam = async (formData, setTeamSuccessfullyCreated) => {
                         body: formData
                     });
                     const success = await response.text()
-                    console.log(success);
                 } catch (error) {
                     console.error('Error setting points:', error);
                 }
-            
             }
             setPoints();
         }

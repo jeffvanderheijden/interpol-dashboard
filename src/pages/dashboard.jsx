@@ -23,7 +23,6 @@ const DashboardPage = () => {
             !hasSession && navigate('/login');
             // If logged in as student, get data
             hasSession && getStudentData().then(data => {
-                console.log(data);
                 if (!data) {
                     console.error("Error getting student data");
                 } else {
