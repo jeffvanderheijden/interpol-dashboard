@@ -18,7 +18,8 @@ export const login = async (formData) => {
             return response.error;
         } else {
             console.log('Login successful:', response.statusText);
-            window.location.reload();
+            console.log(response);
+            // window.location.reload();
             return true;
         }
     } catch (error) {
