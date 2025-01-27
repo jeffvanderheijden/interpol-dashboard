@@ -69,6 +69,7 @@ export const getStudentData = async () => {
         }
 
         const userData = await response.json();
+        console.log(userData);
 
         if (userData && userData.error) {
             console.error('Error student data:', userData.error);
