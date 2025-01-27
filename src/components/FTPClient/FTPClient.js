@@ -24,10 +24,6 @@ const FTPClient = () => {
             const checkOne = hostRef.current.value === "192.168.211.194";
             const checkTwo = usernameRef.current.value === "admin";
             const checkThree = passwordRef.current.value === "25#9ke!";        
-            // For debugging
-            // const checkOne = hostRef.current.value === "";
-            // const checkTwo = usernameRef.current.value === "";
-            // const checkThree = passwordRef.current.value === "";
             const fakeLogin = setTimeout(() => {
                 if (checkOne && checkTwo && checkThree) {
                     setConnected(true);
@@ -53,6 +49,7 @@ const FTPClient = () => {
         const pushToDash = setTimeout(() => {
             setUploading(false);
             setUploaded(true);
+            navigate("/dashboard/")
         }, 3000);
         return () => { clearTimeout(pushToDash) }
     }, [uploading]);

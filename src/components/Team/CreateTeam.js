@@ -117,7 +117,7 @@ const CreateTeam = ({
             }
         ];
         formData.append('students', JSON.stringify(students));
-        
+
         // do fetch request
         createTeam(formData, setTeamSuccessfullyCreated).then(newTeam => {
             console.log(newTeam);
@@ -146,7 +146,7 @@ const CreateTeam = ({
                 setWindows(newWindows);
             }, 4000);
             return () => { clearTimeout(hideCreateTeam) };
-        }        
+        }
     }, [teamSuccessfullyCreated]);
 
     useEffect(() => {

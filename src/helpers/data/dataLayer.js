@@ -144,7 +144,7 @@ export const createTeam = async (formData, setTeamSuccessfullyCreated) => {
             body: formData,
         });
         const newTeam = await response.text();
-        console.log(JSON.parse(newTeam).message);
+
         if (JSON.parse(newTeam).message) {
             setTeamSuccessfullyCreated(true);
             // Set initial points for the team on completion
@@ -154,7 +154,7 @@ export const createTeam = async (formData, setTeamSuccessfullyCreated) => {
             const setPoints = async () => {
                 const formData = new FormData();
                 formData.append('group_id', JSON.parse(newTeam).message);
-                formData.append('challenge_id', 4);
+                formData.append('challenge_id', 1);
                 formData.append('completed', 1);
                 formData.append('points', Math.floor(Math.random() * 200) + 100);
                 try {
@@ -176,7 +176,7 @@ export const createTeam = async (formData, setTeamSuccessfullyCreated) => {
     }
 }
 
-export const getTeamData = async () => {
+export const getTeamData = async (groupId) => {
     try {
         const response = await fetch(`${api}/team-data?id=${groupId}`, {
             method: 'GET',
@@ -265,31 +265,31 @@ export const getGroupChallenges = async (groupId) => {
         const challenges = await response.json();
         console.log(challenges);
         
-        if (!challenges || challenges.error) {
-            console.error('Error getting challenges data:', challenges?.error || 'No challenges data');
-            return false;
-        }
+        // if (!challenges || challenges.error) {
+        //     console.error('Error getting challenges data:', challenges?.error || 'No challenges data');
+        //     return false;
+        // }
 
-        // Fetch points in parallel
-        const specificChallenge = await fetch(`${api}/challenge-by-id?id=${challenge.challenge_id}`, {
-            method: 'GET',
-            credentials: 'include', // Include cookies in the request
-        });
+        // // Fetch points in parallel
+        // const specificChallenge = await fetch(`${api}/challenge-by-id?id=${challenge.challenge_id}`, {
+        //     method: 'GET',
+        //     credentials: 'include', // Include cookies in the request
+        // });
 
-        if (!specificChallenge.ok) {
-            throw new Error(`HTTP error! status: ${specificChallenge.status}`);
-        }
+        // if (!specificChallenge.ok) {
+        //     throw new Error(`HTTP error! status: ${specificChallenge.status}`);
+        // }
 
-        const points = await specificChallenge.json();
+        // const points = await specificChallenge.json();
 
-        if (!points || points.error) {
-            console.error('Error getting team points:', points?.error || 'No points data');
-            return false;
-        }
+        // if (!points || points.error) {
+        //     console.error('Error getting team points:', points?.error || 'No points data');
+        //     return false;
+        // }
 
-        // Attach points to the teamData object and return
-        teamData.points = points.total_points;
-        return teamData;
+        // // Attach points to the teamData object and return
+        // teamData.points = points.total_points;
+        // return teamData;
 
     } catch (error) {
         console.error('Error fetching team or points data:', error);

@@ -53,7 +53,7 @@ const DashboardPage = () => {
                                 { name: "Challenges", open: false, invisible: false, selected: false, left: 220, top: 220 }
                             ]);
                         }
-                    });                    
+                    });
                 }
             });
         });

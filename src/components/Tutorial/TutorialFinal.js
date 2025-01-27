@@ -37,7 +37,7 @@ const TutorialFinal = () => {
                         <>
                             <h1>Agent X:</h1>
                             <p>
-                                Mooi werk, agent. Je hebt de introductie succesvol doorlopen. Dankzij het virus dat je hebt geupload weten we nu dat de hacker gebruik maakt van een <a href="https://www.youtube.com/watch?v=s0sgiY93w9c&ab_channel=ESET" target="_blank">"BotNet".</a>
+                                Mooi werk, agent. Je hebt de introductie succesvol doorlopen. Dankzij het virus dat je hebt geupload weten we nu dat de hacker gebruik maakt van een <a href="https://www.youtube.com/watch?v=s0sgiY93w9c&ab_channel=ESET" rel="noreferrer" target="_blank">"BotNet".</a>
                             </p>
                         </>
                     )}
