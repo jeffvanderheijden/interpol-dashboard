@@ -6,6 +6,10 @@ import { checkSession } from "./../helpers/data/dataLayer";
 import SEO from "../components/SEO";
 import InterpolLogo from "./../assets/icons/InterpolLogo";
 
+import "./../assets/styles/Reset.css";
+import "./../assets/styles/App.css";
+import "./../assets/styles/Navigation.css";
+
 const IndexPage = () => {
 
     // Check if user is logged in as student or teacher
