@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { navigate } from "gatsby";
 import { useSelector, useDispatch } from "react-redux";
 import Explanation from "./../Explanation/Explanation";
 import Button from "./../Button/Button";
@@ -27,6 +28,7 @@ const TutorialFinal = () => {
     const close = () => {
         dispatch(pushStep(1));
         dispatch(nextTutorial());
+        navigate("/login");
     }
 
     return (
@@ -45,7 +47,7 @@ const TutorialFinal = () => {
                         <>
                             <h1>Agent X:</h1>
                             <p>
-                                Je gaat nu in een groep van 4 studenten aan de slag om de hacker te ontmaskeren. Je zult per groep een "Node" van het BotNet gaan uitschakelen. Pas als we alle bots hebben kunnen vernietigen weten we waar de hacker zich exact bevindt. Begin met het maken van een team met 3 andere studenten door te klikken op: "CreateTeam".
+                                Je gaat nu in een groep van 4 studenten aan de slag om de hacker te ontmaskeren. Je zult per groep een "Node" van het BotNet gaan uitschakelen. Pas als we alle bots hebben kunnen vernietigen weten we waar de hacker zich exact bevindt. Begin met het maken van een team met 3 andere studenten door in te loggen en een team te maken.
                             </p>
                         </>
                     )}

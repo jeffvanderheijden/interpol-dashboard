@@ -4,6 +4,9 @@ const LocalStorage = {
     },
     set: (key, value) => {
         (typeof window !== 'undefined') && localStorage.setItem(key, value);
+    },
+    delete: (key) => {
+        (typeof window !== 'undefined') && localStorage.removeItem(key);
     }
 }
 

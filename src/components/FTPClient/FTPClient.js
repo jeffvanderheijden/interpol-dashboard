@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { navigate } from "gatsby";
 import "./FTPClient.css";
 import ConnectingLoader from "./../Loader/ConnectingLoader";
 import { pushTutorial } from "../../state/tutorial";
@@ -42,14 +41,12 @@ const FTPClient = () => {
     }, [loading]);
 
     useEffect(() => {
-        if (uploading === false) return;
-
-        dispatch(pushTutorial('tutorialFinal'));
+        if (uploading === false) return;        
         dispatch(setFileVisibleContent(false));
         const pushToDash = setTimeout(() => {
             setUploading(false);
             setUploaded(true);
-            navigate("/dashboard/");
+            dispatch(pushTutorial('tutorialFinal'));
         }, 3000);
         return () => { clearTimeout(pushToDash) }
     }, [uploading]);

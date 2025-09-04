@@ -81,3 +81,24 @@ h1 {
     margin-bottom: 4px;
 }
 
+#index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 12px;
+    text-align: center;
+    padding: 20px;
+}
+
+#index a {
+    color: #000;
+}
+
+#index h1 {
+    color: #FFF;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}

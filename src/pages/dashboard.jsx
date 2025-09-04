@@ -8,8 +8,7 @@ import CreateTeam from "../components/Team/CreateTeam";
 import ScoreBoard from "../components/Score/ScoreBoard";
 import Challenges from "../components/Challenges/Challenges";
 import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import TutorialFinal from "../components/Tutorial/TutorialFinal";
+// import SEO from "../components/SEO";
 import StudentInfo from '../components/Student/StudentInfo';
 
 const DashboardPage = () => {
@@ -103,8 +102,6 @@ const DashboardPage = () => {
                         logout={logout}
                     />
                 )}
-                <SEO title="Dashboard" />
-                <TutorialFinal />
             </Layout>
         </NoSSR>
     );
