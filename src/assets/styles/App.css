@@ -95,6 +95,9 @@ h1 {
 #index a {
     color: #000;
 }
+#index a:hover {
+    text-decoration: none;
+}
 
 #index h1 {
     color: #FFF;
