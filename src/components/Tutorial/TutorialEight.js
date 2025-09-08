@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Explanation from "./../Explanation/Explanation";
 import Button from "./../Button/Button";
-import file from "./../../assets/files/definitely_not_a_virus.txt";
 
 import { nextStep, pushStep, nextTutorial, tutorialSelector, stepSelector } from "../../state/tutorial";
 
 const TutorialEight = () => {
+    let fileUrl = "";
+    if (typeof window !== "undefined") {
+        fileUrl = require("./../../assets/files/definitely_not_a_virus.txt");
+    }
+
     const dispatch = useDispatch();
     const totalSteps = 1;
     const tutorial = useSelector(tutorialSelector) === "tutorialEight";
@@ -38,7 +42,7 @@ const TutorialEight = () => {
                         <>
                             <h1>EE-AY:</h1>
                             <p>
-                                Nu dat we het bestand hebben geopend, moeten we ons virus erin zetten. Download <a href={file} download>hier</a> een bestand, gebruik Visual Studio Code om het bestand te openen. Kopieer en plak daarna de code in deze teksteditor. Sla het bestand daarna op met de sneltoets: CMD + S. (Of CTRL + S op windows)
+                                Nu dat we het bestand hebben geopend, moeten we ons virus erin zetten. Download <a href={fileUrl} download>hier</a> een bestand, gebruik Visual Studio Code om het bestand te openen. Kopieer en plak daarna de code in deze teksteditor. Sla het bestand daarna op met de sneltoets: CMD + S. (Of CTRL + S op windows)
                             </p>
                         </>
                     )}
