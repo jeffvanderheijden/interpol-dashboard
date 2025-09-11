@@ -9,8 +9,8 @@ const ScoreBoard = () => {
 
     useEffect(() => {
         let strippedKlas = klas;
-        if (str.length > 3) {
-            strippedKlas = str.slice(0, -1);
+        if (strippedKlas.length > 3) {
+            strippedKlas = strippedKlas.slice(0, -1);
         }
 
         getGroupsByClass(strippedKlas).then(data => {
