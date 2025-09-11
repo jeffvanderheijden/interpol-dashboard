@@ -68,8 +68,8 @@ const Window = ({
                 zIndex: isDragging ? 100 : 1,
                 left: left,
                 top: top,
-                width: window.name === "CodeEditor" ? "600px" : window.name === "LeaderBoard" ? "600px" : "400px",
-                height: window.name === "CodeEditor" ? "500px" : window.name === "ServerList" ? "450px" : window.name === "CreateTeam" ? "612px" : window.name === "LeaderBoard" ? "600px" : "400px"
+                width: window.name === "CodeEditor" ? "600px" : window.name === "LeaderBoard" ? "800px" : "400px",
+                height: window.name === "CodeEditor" ? "500px" : window.name === "ServerList" ? "450px" : window.name === "CreateTeam" ? "612px" : window.name === "LeaderBoard" ? "800px" : "400px"
             }}
         >
             <div className="programWindowTop">
