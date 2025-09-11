@@ -36,6 +36,7 @@ const DashboardPage = () => {
                                 // + 100px per new window
                             ]);
                         } else {
+                            console.log(additionalData);
                             setStudent({
                                 name: data[0].name[0],
                                 class: data[0].description[0],
