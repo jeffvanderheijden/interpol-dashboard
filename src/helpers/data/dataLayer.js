@@ -206,7 +206,7 @@ export const getGroupsByClass = async (klas) => {
     try {
         const response = await fetch(`${api}/groups-by-class?class=${klas}`, {
             method: 'GET',
-            credentials: 'include', // cookies meegeven
+            credentials: 'include',
         });
 
         if (!response.ok) {
@@ -217,22 +217,25 @@ export const getGroupsByClass = async (klas) => {
 
         if (!groupsData || groupsData.error) {
             console.error('Error getting group data:', groupsData?.error || 'No group data');
-            return false;
+            return [];
         }
 
-        // Zorg dat punten als getal worden behandeld
-        const groupsWithPoints = groupsData.map(group => ({
-            ...group,
-            points: Number(group.points) || 0
-        }));
+        // Converteer punten naar getal en sorteer van hoog naar laag
+        const groupsSorted = groupsData
+            .map(group => ({
+                ...group,
+                points: Number(group.points) || 0
+            }))
+            .sort((a, b) => b.points - a.points);
 
-        return groupsWithPoints;
+        return groupsSorted;
 
     } catch (error) {
         console.error('Error fetching groups data:', error);
-        return false;
+        return [];
     }
 };
+
 
 
 export const getGroupChallenges = async (groupId) => {
