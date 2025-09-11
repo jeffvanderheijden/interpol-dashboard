@@ -194,9 +194,9 @@ const CreateTeam = ({
                 <div>
                     <label>
                         <span>Student 4</span>
-                        <input className="half" type="text" id="student4" name="student4" placeholder="Student voornaam" required />
+                        <input className="half" type="text" id="student4" name="student4" placeholder="Student voornaam" />
                     </label>
-                    <input className="half" type="number" id="student4_number" name="student4_number" placeholder="Student nummer" pattern="\d*" minLength="6" maxLength="6" required />
+                    <input className="half" type="number" id="student4_number" name="student4_number" placeholder="Student nummer" pattern="\d*" minLength="6" maxLength="6" />
                 </div>
                 <div className="buttonWrapper">
                     {!teamSuccessfullyCreated && (
