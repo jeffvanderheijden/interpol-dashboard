@@ -8,12 +8,7 @@ const ScoreBoard = () => {
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
-        let strippedKlas = klas;
-        if (strippedKlas.length > 3) {
-            strippedKlas = strippedKlas.slice(0, -1);
-        }
-
-        getGroupsByClass(strippedKlas).then(data => {
+        getGroupsByClass(klas).then(data => {
             setGroups(data || []);
         });
     }, [klas]);
