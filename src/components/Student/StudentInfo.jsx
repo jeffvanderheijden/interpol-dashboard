@@ -8,6 +8,7 @@ const StudentInfo = ({
 }) => {
     return (
         <div class="studentInfo">
+            { console.log(student) }
             {student.team && (
                 <div id="team">
                     <h2>{student.team}</h2>
