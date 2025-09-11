@@ -204,49 +204,36 @@ export const getTeamData = async (groupId) => {
 
 export const getGroupsByClass = async (klas) => {
     try {
-        // Make the initial request to get team data
         const response = await fetch(`${api}/groups-by-class?class=${klas}`, {
             method: 'GET',
-            credentials: 'include', // Include cookies in the request
+            credentials: 'include', // cookies meegeven
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const teamData = await response.json();
-        
-        if (!teamData || teamData.error) {
-            console.error('Error getting team data:', teamData?.error || 'No team data');
+        const groupsData = await response.json();
+
+        if (!groupsData || groupsData.error) {
+            console.error('Error getting group data:', groupsData?.error || 'No group data');
             return false;
         }
 
-        // Fetch points in parallel
-        const pointsResponse = await fetch(`${api}/group-points?id=${teamData.id}`, {
-            method: 'GET',
-            credentials: 'include', // Include cookies in the request
-        });
+        // Zorg dat punten als getal worden behandeld
+        const groupsWithPoints = groupsData.map(group => ({
+            ...group,
+            points: Number(group.points) || 0
+        }));
 
-        if (!pointsResponse.ok) {
-            throw new Error(`HTTP error! status: ${pointsResponse.status}`);
-        }
-
-        const points = await pointsResponse.json();
-
-        if (!points || points.error) {
-            console.error('Error getting team points:', points?.error || 'No points data');
-            return false;
-        }
-
-        // Attach points to the teamData object and return
-        teamData.points = points.total_points;
-        return teamData;
+        return groupsWithPoints;
 
     } catch (error) {
-        console.error('Error fetching team or points data:', error);
-        return false; // Explicitly return false on failure
+        console.error('Error fetching groups data:', error);
+        return false;
     }
 };
+
 
 export const getGroupChallenges = async (groupId) => {
     try {
